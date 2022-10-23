@@ -9,7 +9,7 @@ namespace OuvICEx.API.Domain.Services
 
         public SearchPostService(IRepository repository)
         {
-            this._repository = repository;
+            _repository = repository;
         }
 
         public List<PostInfo> GetPostsBasedOnSelectionFilter(PostSelectionFilter filter)

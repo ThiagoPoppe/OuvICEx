@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OuvICEx.API.Domain\OuvICEx.API.Domain.csproj" />
+    <ProjectReference Include="..\OuvICEx.API.Repository\OuvICEx.API.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
