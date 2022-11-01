@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+
+.header-color {background-color:rgb(242, 242, 242) !important;}
+.alt-background-color {background-color:rgb(235, 235, 235) !important;}
+.background-color {background-color:rgb(246, 246, 246)}
+.header-text-color {color:#32aafa;}
+.title-color {color:'#000000';}
+.text-color-dark {color:'#323232';}
+.text-color-light {color:'#b0b0b0';}
+
+body {
+    margin:0px;
+    padding:0px;
+}
+
+h1{
+    font-size: 48px;;
+}
+h2{
+    font-size:32px;
+}
+
+.footer{
+    height:9vh;
+    position:absolute;
+    top:91vh;
+    left: 0;
+    right: 0;
+
+}
+
+p{
+    font-size:18px;
+}
