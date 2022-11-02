@@ -1,18 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OuvICEx.API.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OuvICEx.API.Domain.Entities
 {
-    public enum PublicationStatus
-    {
-        Solved, Unsolved, InProgress
-    }
-
-    public enum PublicationContext
-    {
-        Suggestion, Compliment, Complaint
-    }
-
     public class Publication
     {
         [Key]

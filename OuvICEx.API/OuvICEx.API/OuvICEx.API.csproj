@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\OuvICEx.API.Domain\OuvICEx.API.Domain.csproj" />
     <ProjectReference Include="..\OuvICEx.API.Repository\OuvICEx.API.Repository.csproj" />
   </ItemGroup>

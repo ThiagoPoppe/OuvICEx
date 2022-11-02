@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using OuvICEx.API.Domain.Interfaces.Repository;
+using OuvICEx.API.Domain.Interfaces.Service;
+using OuvICEx.API.Domain.Services;
 using OuvICEx.API.Repository.Data;
+using OuvICEx.API.Repository.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,9 @@ builder.Services.AddSwaggerGen();
 // Dependency injections
 builder.Services.AddDbContext<PublicationDbContext>(
     o => o.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
+
+builder.Services.AddScoped<IPublicationRepository, PublicationRepository>();
+builder.Services.AddScoped<IPublicationService, PublicationService>();
 
 var app = builder.Build();
 
