@@ -5,6 +5,10 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OuvICEx.API", "OuvICEx.API\OuvICEx.API.csproj", "{80EEBB30-CE50-4429-8853-9BAA36997079}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OuvICEx.API.Domain", "OuvICEx.API.Domain\OuvICEx.API.Domain.csproj", "{86D9ED22-ABFA-4E63-8839-1302F82585DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OuvICEx.API.Repository", "OuvICEx.API.Repository\OuvICEx.API.Repository.csproj", "{5E5D25B8-D994-4A81-90E7-DCDE6474BD72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{80EEBB30-CE50-4429-8853-9BAA36997079}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80EEBB30-CE50-4429-8853-9BAA36997079}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80EEBB30-CE50-4429-8853-9BAA36997079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86D9ED22-ABFA-4E63-8839-1302F82585DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86D9ED22-ABFA-4E63-8839-1302F82585DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86D9ED22-ABFA-4E63-8839-1302F82585DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86D9ED22-ABFA-4E63-8839-1302F82585DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E5D25B8-D994-4A81-90E7-DCDE6474BD72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E5D25B8-D994-4A81-90E7-DCDE6474BD72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E5D25B8-D994-4A81-90E7-DCDE6474BD72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E5D25B8-D994-4A81-90E7-DCDE6474BD72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

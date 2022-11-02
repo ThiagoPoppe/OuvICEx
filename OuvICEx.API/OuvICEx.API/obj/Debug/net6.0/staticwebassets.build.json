@@ -1,11 +1,34 @@
 {
   "Version": 1,
-  "Hash": "kBaWAtMZ90VLaMA6bpJ45IK4VrehxRq5QWnpjJVaZww=",
+  "Hash": "azQnTVo2x7gmU+WoN1VJGrHZZ8+koCFFFIqEYWxaXV0=",
   "Source": "OuvICEx.API",
   "BasePath": "_content/OuvICEx.API",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\UFMG\\2022.2\\PDS\\OuvICEx\\OuvICEx.API\\OuvICEx.API.Domain\\OuvICEx.API.Domain.csproj",
+      "Version": 2,
+      "Source": "OuvICEx.API.Domain",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
+    },
+    {
+      "Identity": "D:\\UFMG\\2022.2\\PDS\\OuvICEx\\OuvICEx.API\\OuvICEx.API.Repository\\OuvICEx.API.Repository.csproj",
+      "Version": 2,
+      "Source": "OuvICEx.API.Repository",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }
