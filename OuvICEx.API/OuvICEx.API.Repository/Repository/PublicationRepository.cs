@@ -18,5 +18,18 @@ namespace OuvICEx.API.Repository.Repository
         {
             return await _context.Publications.ToListAsync();
         }
+
+        public async Task<Publication?> GetPublicationByIdAsync(int id)
+        {
+            return await _context.Publications.FindAsync(id);
+        }
+
+        public async Task<Publication> CreatePublicationAsync(Publication publication)
+        {
+            await _context.Publications.AddAsync(publication);
+            await _context.SaveChangesAsync();
+
+            return publication;
+        }
     }
 }
