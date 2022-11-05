@@ -25,7 +25,16 @@ export class HistoricoComponent implements OnInit {
     a.isVisible = true;
     a.targetDepartment = 'd';
 
-    this.posts = [a];
+    let b = new Post();
+    b.authorDepartment = 'e';
+    b.content = 'f';
+    b.context = 'g';
+    b.createdDate = '2';
+    b.isResolved = false;
+    b.isVisible = true;
+    b.targetDepartment = 'h';
+
+    this.posts = [a,b];
 
 
   }

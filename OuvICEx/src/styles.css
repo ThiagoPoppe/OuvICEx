@@ -32,3 +32,31 @@ h2{
 p{
     font-size:18px;
 }
+
+.grid-container {
+    display: grid;
+    column-gap: 8vw;
+    grid-template-columns: auto auto auto;
+    padding-left: 20vw;
+    padding-right: 12vw;
+    padding-top:3vh;
+}
+  
+.grid-item {
+    border: 2px solid rgba(44, 44, 44, 0.8);
+    border-radius:8px;
+    padding: 10px;
+    text-align: center;
+    width: 25vw;
+    height: 22vh;
+}
+
+.blue-btn{
+    border: 1px solid rgb(47, 163, 240);
+    border-radius:8px;
+    background-color: rgb(50,170,250);
+    color:white;
+}
+.blue-btn:hover{
+    background-color: rgb(49, 142, 204);
+}

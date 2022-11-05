@@ -1,18 +1,54 @@
-<p>historico works!</p>
-<Table>
-    <thead>
-        <th>Departamento do Autor</th>
-        <th>Departamento Alvo</th>
-        <th>Conteudo</th>
-        <th>Data</th>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let post of posts">
-            <td>{{ post.authorDepartment }}</td>
-            <td>{{ post.targetDepartment }}</td>
-            <td>{{ post.content }}</td>
-            <td>{{ post.createdDate }}</td>
+<body style="height:83vh;margin:0px!important;padding:0px!important;">
+    <div class="alt-background-color" >
+        <div style="padding-top:15px;padding-left:100px;padding-right:100px">
+            <h1 class="title-color">Histórico</h1>
+            <hr>
+            <h3 class="text-color-dark">Abaixo, você consegue filtrar as postagens que deseja ver.</h3>
+            <div style="display:flex;">         
+                <div class="form-group">
+                    <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
+                        <option value="1">DCC</option>
+                        <option value="2">Departamento de Química</option>
+                    </select><br>
+                </div>
+            
+                <div class="form-group">
+                    <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
+                        <option value="1">DCC</option>
+                        <option value="2">Departamento de Química</option>
+                    </select><br>
+                </div>
 
-        </tr>
-    </tbody>
-</Table>
+                <div class="form-group">
+                    <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
+                        <option value="1">Reclamação</option>
+                        <option value="2">Sugestão</option>
+                        <option value="3">Denúncia</option>
+                    </select><br>
+                </div>
+            
+                <div class="form-group">
+                    <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
+                        <option value="1">Resolvido</option>
+                        <option value="2">Pendente</option>
+                    </select><br>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary mt-4 blue-btn" value="Enviar">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class='background-color' style="height:66vh;">
+        <div class="grid-container">
+            <div class="grid-item"*ngFor = "let post of posts">
+                <h6>{{ post.authorDepartment }}</h6>
+                <h6>{{ post.targetDepartment }}</h6>
+                <h6>{{ post.content }}</h6>
+                <h6>{{ post.createdDate }}</h6>
+            </div>
+        </div>
+    </div>
+</body>
