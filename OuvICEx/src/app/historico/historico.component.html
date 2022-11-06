@@ -3,24 +3,24 @@
         <div style="padding-top:15px;padding-left:100px;padding-right:100px">
             <h1 class="title-color">Histórico</h1>
             <hr>
-            <h3 class="text-color-dark">Abaixo, você consegue filtrar as postagens que deseja ver.</h3>
-            <div style="display:flex;">         
+            <div style="display:flex;padding:0rem;">         
                 <div class="form-group">
-                    <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
+                    <select style="padding-left:0rem!important;" type="form-control" class="form-control" name="DepartamentoReferenciado" id="DepartamentoReferenciado" formControlName="context" placeholder="Departamento">
                         <option value="1">DCC</option>
                         <option value="2">Departamento de Química</option>
                     </select><br>
                 </div>
             
                 <div class="form-group">
-                    <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
+                    <select type="form-control" class="form-control" name="DepartamentoAutor" id="DepartamentoAutor" formControlName="context">
                         <option value="1">DCC</option>
                         <option value="2">Departamento de Química</option>
                     </select><br>
                 </div>
 
                 <div class="form-group">
-                    <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
+                    <select type="form-control" class="form-control" name="context" id="context" formControlName="context" required>
+                        <option value="" disabled selected>a</option>
                         <option value="1">Reclamação</option>
                         <option value="2">Sugestão</option>
                         <option value="3">Denúncia</option>
@@ -28,14 +28,24 @@
                 </div>
             
                 <div class="form-group">
-                    <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
+                    <select type="form-control" class="form-control" name="Situação" id="Situação" formControlName="context">
                         <option value="1">Resolvido</option>
                         <option value="2">Pendente</option>
                     </select><br>
                 </div>
+                <p style="padding-top:0.4rem;">de</p>
+                <div class="form-group" style="width:7vw;">
+                    <input type="date" class="form-control" name="SatrtDate" id="SatrtDate">
+                    <br>
+                </div>
+                <p style="padding-top:0.4rem;">a</p>
+                <div class="form-group" style="width:7vw;">
+                    <input type="date" class="form-control" name="EndDate" id="EndDate">
+                    <br>
+                </div>
                 
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary mt-4 blue-btn" value="Enviar">
+                <div class="form-group" style="padding:1rem;padding-right:0rem!important;">
+                    <input type="submit" class="btn btn-primary mt-4 blue-btn" value="Filtrar">
                 </div>
             </div>
         </div>
@@ -44,10 +54,12 @@
     <div class='background-color' style="height:66vh;">
         <div class="grid-container">
             <div class="grid-item"*ngFor = "let post of posts">
-                <h6>{{ post.authorDepartment }}</h6>
-                <h6>{{ post.targetDepartment }}</h6>
-                <h6>{{ post.content }}</h6>
-                <h6>{{ post.createdDate }}</h6>
+                <h4 style="text-align:left;">{{post.content}}</h4>
+                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;">Departamento do Autor: {{ post.authorDepartment }}</p>
+                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;">Departamento Referenciado: {{ post.targetDepartment }}</p>
+                <br>
+                <p class="text-color-light" style="padding:0rem;margin:0rem;">Contexto: {{ post.content }}</p>
+                <p class="text-color-light" style="padding:0rem;margin:0rem;">Situação:{{true==post.isResolved ? ' Resolvido, ': ' Não Resolvido, '}}{{ post.createdDate }}</p>
             </div>
         </div>
     </div>

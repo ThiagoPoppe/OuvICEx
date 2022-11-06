@@ -5,8 +5,8 @@
 .background-color {background-color:rgb(246, 246, 246)}
 .header-text-color {color:#32aafa;}
 .title-color {color:'#000000';}
-.text-color-dark {color:'#323232';}
-.text-color-light {color:'#b0b0b0';}
+.text-color-dark {color: #323232!important;}
+.text-color-light {color: #b0b0b0!important;}
 
 body {
     margin:0px;
@@ -47,8 +47,10 @@ p{
     border-radius:8px;
     padding: 10px;
     text-align: center;
-    width: 25vw;
-    height: 22vh;
+    min-width: 25vw;
+    max-width:25vw;
+    min-height: 22vh;
+    max-height:60vh;
 }
 
 .blue-btn{
@@ -56,7 +58,19 @@ p{
     border-radius:8px;
     background-color: rgb(50,170,250);
     color:white;
+    height:4.5vh;
+    width:6vw;
 }
 .blue-btn:hover{
     background-color: rgb(49, 142, 204);
+}
+.form-group{
+    padding:1rem;
+    width:12vw;
+    height:5vh;
+}
+
+.form-control{
+    width:100%;
+    height:100%;
 }

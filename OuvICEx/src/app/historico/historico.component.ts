@@ -17,13 +17,13 @@ export class HistoricoComponent implements OnInit {
     console.log(this.posts);
 
     let a = new Post();
-    a.authorDepartment = 'a';
-    a.content = 'b';
-    a.context = 'c';
-    a.createdDate = '1';
+    a.authorDepartment = 'DCC';
+    a.content = 'Salas Totalmente Defesadas';
+    a.context = 'Reclamação';
+    a.createdDate = '13/09/2022';
     a.isResolved = false;
     a.isVisible = true;
-    a.targetDepartment = 'd';
+    a.targetDepartment = 'DCC';
 
     let b = new Post();
     b.authorDepartment = 'e';
@@ -35,6 +35,7 @@ export class HistoricoComponent implements OnInit {
     b.targetDepartment = 'h';
 
     this.posts = [a,b];
+    console.log('oi');
 
 
   }
