@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../models/post';
 import { GetPostsService } from '../services/get-posts.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-historico',
@@ -9,10 +10,25 @@ import { GetPostsService } from '../services/get-posts.service';
 })
 export class HistoricoComponent implements OnInit {
 
-  constructor(private getPostsService: GetPostsService) { }
+  constructor(private getPostsService: GetPostsService, private formBuilder: FormBuilder) { }
   posts: Post[] = [];
 
+
+
+  FilterForm!: FormGroup;
+
+  createForm(filter: Post){
+    this.FilterForm = this.formBuilder.group({
+      content: [filter.content, [Validators.required]],
+      context: [filter.context],
+      authorDepartment: [filter.authorDepartment],
+      targetDepartment: [filter.targetDepartment],
+    })
+  }
+
+
   ngOnInit(): void {
+    this.createForm(new Post());
     this.getPostsService.getPosts().subscribe((result: Post[]) => {this.posts = result;console.log(this.posts)});
     console.log(this.posts);
 
@@ -38,6 +54,14 @@ export class HistoricoComponent implements OnInit {
     console.log('oi');
 
 
+  }
+
+  onSubmit() {
+    // aqui você pode implementar a logica para fazer seu formulário salvar
+    console.log("Filtrou");
+
+    // Usar o método reset para limpar os controles na tela
+    // this.reclameForm.reset(new Reclame());
   }
 
 }

@@ -3,9 +3,10 @@
         <div style="padding-top:15px;padding-left:100px;padding-right:100px">
             <h1 class="title-color">Histórico</h1>
             <hr>
-            <div style="display:flex;padding:0rem;">         
+            <form [formGroup]="FilterForm" (ngSubmit)="onSubmit()" style="display:flex;padding:0rem;">         
                 <div class="form-group">
                     <select style="padding-left:0rem!important;" type="form-control" class="form-control" name="DepartamentoReferenciado" id="DepartamentoReferenciado" formControlName="context" placeholder="Departamento">
+                        <option value="" disabled selected>Departamento Referenciado</option>
                         <option value="1">DCC</option>
                         <option value="2">Departamento de Química</option>
                     </select><br>
@@ -13,6 +14,7 @@
             
                 <div class="form-group">
                     <select type="form-control" class="form-control" name="DepartamentoAutor" id="DepartamentoAutor" formControlName="context">
+                        <option value="" disabled selected>Departamento do Autor</option>
                         <option value="1">DCC</option>
                         <option value="2">Departamento de Química</option>
                     </select><br>
@@ -20,7 +22,7 @@
 
                 <div class="form-group">
                     <select type="form-control" class="form-control" name="context" id="context" formControlName="context" required>
-                        <option value="" disabled selected>a</option>
+                        <option value="" disabled selected>Contexto</option>
                         <option value="1">Reclamação</option>
                         <option value="2">Sugestão</option>
                         <option value="3">Denúncia</option>
@@ -29,37 +31,38 @@
             
                 <div class="form-group">
                     <select type="form-control" class="form-control" name="Situação" id="Situação" formControlName="context">
+                        <option value="" disabled selected>Situação</option>
                         <option value="1">Resolvido</option>
                         <option value="2">Pendente</option>
                     </select><br>
                 </div>
                 <p style="padding-top:0.4rem;">de</p>
-                <div class="form-group" style="width:7vw;">
+                <div class="form-group" style="width:7vw;padding-top:1rem;">
                     <input type="date" class="form-control" name="SatrtDate" id="SatrtDate">
                     <br>
                 </div>
                 <p style="padding-top:0.4rem;">a</p>
-                <div class="form-group" style="width:7vw;">
+                <div class="form-group" style="width:7vw;padding-top:1rem;">
                     <input type="date" class="form-control" name="EndDate" id="EndDate">
                     <br>
                 </div>
                 
-                <div class="form-group" style="padding:1rem;padding-right:0rem!important;">
-                    <input type="submit" class="btn btn-primary mt-4 blue-btn" value="Filtrar">
+                <div style="padding:1rem;padding-right:0rem!important;margin-right: 0rem;">
+                    <input type="submit" class="btn btn-primary mt-4 blue-btn" value="Filtrar" tyle="padding:1rem;padding-right:0rem!important;margin-right: 0rem;">
                 </div>
-            </div>
+            </form>
         </div>
         
     </div>
     <div class='background-color' style="height:66vh;">
         <div class="grid-container">
-            <div class="grid-item"*ngFor = "let post of posts">
-                <h4 style="text-align:left;">{{post.content}}</h4>
-                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;">Departamento do Autor: {{ post.authorDepartment }}</p>
-                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;">Departamento Referenciado: {{ post.targetDepartment }}</p>
+            <div class="grid-item" *ngFor = "let post of posts">
+                <h4 style="text-align:left;font-size:16px;">{{post.content}}</h4>
+                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;font-size:16px;">• Departamento do Autor: {{ post.authorDepartment }}</p>
+                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;font-size:16px;">• Departamento Referenciado: {{ post.targetDepartment }}</p>
                 <br>
-                <p class="text-color-light" style="padding:0rem;margin:0rem;">Contexto: {{ post.content }}</p>
-                <p class="text-color-light" style="padding:0rem;margin:0rem;">Situação:{{true==post.isResolved ? ' Resolvido, ': ' Não Resolvido, '}}{{ post.createdDate }}</p>
+                <p class="text-color-light" style="padding-left:2rem;margin:0rem;text-align: left;font-size:14px;">Contexto: {{ post.content }}</p>
+                <p class="text-color-light" style="padding-left:2rem;margin:0rem;text-align: left;font-size:14px;">Situação:{{true==post.isResolved ? ' Resolvido, ': ' Não Resolvido, '}}{{ post.createdDate }}</p>
             </div>
         </div>
     </div>
