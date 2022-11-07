@@ -2,7 +2,7 @@
 
 namespace OuvICEx.API.Domain.Interfaces.Repository
 {
-    public interface IPublicationRepository
+    public interface IPublicationRepository : IRepositoryBase<Publication>
     {
         public Task<IEnumerable<Publication>> GetAllPublicationsAsync();
     }

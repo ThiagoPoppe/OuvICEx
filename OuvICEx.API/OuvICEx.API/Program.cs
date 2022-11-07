@@ -15,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Dependency injections
-builder.Services.AddDbContext<PublicationDbContext>(
+builder.Services.AddDbContext<OuvICExDbContext>(
     o => o.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
 
 builder.Services.AddScoped<IPublicationRepository, PublicationRepository>();

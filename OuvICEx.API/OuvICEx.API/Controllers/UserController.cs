@@ -21,5 +21,11 @@ namespace OuvICEx.API.Controllers
         {
             return await _userService.GetAllUsersAsync();
         }
+
+        [HttpPost]
+        public async Task<IEnumerable<User>> Post([FromBody] User user)
+        {
+
+        }
     }
 }

@@ -5,18 +5,14 @@ using OuvICEx.API.Repository.Data;
 
 namespace OuvICEx.API.Repository.Repository
 {
-    public class PublicationRepository : IPublicationRepository
+    public class PublicationRepository : RepositoryBase<Publication>, IPublicationRepository
     {
-        private readonly PublicationDbContext _context;
 
-        public PublicationRepository(PublicationDbContext context)
-        {
-            _context = context;
-        }
+        public PublicationRepository(OuvICExDbContext context) : base(context) { }
 
         public async Task<IEnumerable<Publication>> GetAllPublicationsAsync()
         {
-            return await _context.Publications.ToListAsync();
+            return await Db.Publications.ToListAsync();
         }
     }
 }

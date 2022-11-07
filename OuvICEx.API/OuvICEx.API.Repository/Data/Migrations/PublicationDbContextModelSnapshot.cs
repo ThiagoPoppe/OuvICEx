@@ -9,7 +9,7 @@ using OuvICEx.API.Repository.Data;
 
 namespace OuvICEx.API.Repository.Data.Migrations
 {
-    [DbContext(typeof(PublicationDbContext))]
+    [DbContext(typeof(OuvICExDbContext))]
     partial class PublicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

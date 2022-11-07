@@ -10,7 +10,7 @@ using OuvICEx.API.Repository.Data;
 
 namespace OuvICEx.API.Repository.Data.Migrations
 {
-    [DbContext(typeof(PublicationDbContext))]
+    [DbContext(typeof(OuvICExDbContext))]
     [Migration("20221105002329_CreateUserTable")]
     partial class CreateUserTable
     {
