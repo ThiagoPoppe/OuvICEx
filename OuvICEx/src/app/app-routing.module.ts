@@ -7,7 +7,7 @@ import { ReclameComponent } from './reclame/reclame.component';
 import { RegistreComponent } from './registre/registre.component';
 
 const routes: Routes = [
-  {path: "home", component: HomeComponent},
+  {path: "", component: HomeComponent},
   {path: "historico", component: HistoricoComponent},
   {path: "estatisticas", component: EstatisticaComponent},
   {path: "reclame", component: ReclameComponent},

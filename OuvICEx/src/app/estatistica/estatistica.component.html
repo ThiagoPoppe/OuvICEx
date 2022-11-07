@@ -1,1 +1,21 @@
-<p>estatistica works!</p>
+<body style="height:83vh;margin:0px!important;padding:0px!important;">
+    
+    <div class="alt-background-color" style="min-height:25vh;" >
+        <div style="padding-top:15px;padding-left:100px;padding-right:100px">
+            <h1 class="title-color">Estatísticas</h1>
+            <hr>
+        </div> 
+    </div>
+    <div class="background-color" style="min-height:65vh; text-align: center;">
+        <div>
+            <p> Escolha o gráfico que deseja ver.</p>
+            <button (click)="showDpt()">Departamentos</button>
+            <button (click)="showContext()">Contexto</button>
+
+        </div>
+        <div id="chartDiv" class="background-color chart">
+            <canvas id="chart"></canvas>
+        </div>
+    </div>
+
+</body>
