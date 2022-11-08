@@ -34,6 +34,10 @@ namespace OuvICEx.API.Domain.Services
         public DepartamentModel GetDepartamentById(int id)
         {
             var departament = _repository.FindByPrimaryKey(id);
+            if (departament == null)
+            {
+                throw new BadHttpRequestException("Id doesn't exists");
+            }
             return _mapper.Map<DepartamentModel>(departament);
         }
 

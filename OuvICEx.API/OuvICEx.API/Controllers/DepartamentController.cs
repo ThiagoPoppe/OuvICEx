@@ -15,31 +15,37 @@ namespace OuvICEx.API.Controllers
             _departamentService = departamentService;
         }
 
-        //[HttpGet]
-        //public ActionResult<IEnumerable<DepartamentModel>> Get()
-        //{   
-        //    try
-        //    {
-        //        var departaments = _departamentService.GetAllDepartaments();
-        //        return Ok(departaments);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return StatusCode(500);
-        //    }
-        //}
-
         [HttpGet]
-        public IEnumerable<DepartamentModel> Get()
+        public ActionResult Get()
         {
-                return _departamentService.GetAllDepartaments();
+            try
+            {
+                var departaments = _departamentService.GetAllDepartaments();
+                return Ok(departaments);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
 
         }
 
         [HttpGet("{id}")]        
-        public DepartamentModel GetById(int id)
+        public ActionResult GetById(int id)
         {
-            return _departamentService.GetDepartamentById(id);
+            try
+            {
+                var departament = _departamentService.GetDepartamentById(id);
+                return Ok(departament);
+            }
+            catch (BadHttpRequestException e)
+            {
+                return StatusCode(400, e.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
 
         }
 
@@ -53,7 +59,6 @@ namespace OuvICEx.API.Controllers
             }
             catch (BadHttpRequestException e)
             {
-                
                 return StatusCode(403, e.Message);
             }
             catch (Exception)
