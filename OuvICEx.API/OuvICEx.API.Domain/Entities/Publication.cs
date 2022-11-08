@@ -11,7 +11,7 @@ namespace OuvICEx.API.Domain.Entities
 
         [Required]
         [StringLength(1080, ErrorMessage = "{0} length must be less than {1}")]
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         [Required]
         public PublicationStatus Status { get; set; }

@@ -14,9 +14,9 @@ namespace OuvICEx.API.Domain.Services
             _repository = repository;
         }
 
-        public async Task<IEnumerable<Publication>> GetAllPublicationsAsync()
+        public IEnumerable<Publication> GetAllPublications()
         {
-            return  await _repository.GetAllPublicationsAsync();
+            return _repository.GetAllEntities();
         }
 
         public async Task<Publication?> GetPublicationByIdAsync(int id)

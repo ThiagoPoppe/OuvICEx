@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OuvICEx.API.Repository.Data;
 
@@ -10,9 +11,10 @@ using OuvICEx.API.Repository.Data;
 namespace OuvICEx.API.Repository.Data.Migrations
 {
     [DbContext(typeof(OuvICExDbContext))]
-    partial class PublicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221105002329_CreateUserTable")]
+    partial class CreateUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.10");
