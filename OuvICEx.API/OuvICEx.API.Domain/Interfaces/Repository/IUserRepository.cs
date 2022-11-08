@@ -4,6 +4,6 @@ namespace OuvICEx.API.Domain.Interfaces.Repository
 {
     public interface IUserRepository : IRepositoryBase<User>
     {
-
+        public User? GetUserByEmail(string email);
     }
 }
