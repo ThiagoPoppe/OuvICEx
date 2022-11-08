@@ -4,6 +4,6 @@ namespace OuvICEx.API.Domain.Interfaces.Service
 {
     public interface IUserService
     {
-        public Task<IEnumerable<User>> GetAllUsersAsync();
+        public IEnumerable<User> GetAllUsers();
     }
 }

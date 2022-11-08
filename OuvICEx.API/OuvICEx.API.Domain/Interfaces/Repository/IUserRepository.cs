@@ -2,8 +2,8 @@
 
 namespace OuvICEx.API.Domain.Interfaces.Repository
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepositoryBase<User>
     {
-        public Task<IEnumerable<User>> GetAllUsersAsync();
+
     }
 }

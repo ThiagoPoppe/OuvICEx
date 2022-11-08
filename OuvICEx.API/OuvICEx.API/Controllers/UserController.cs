@@ -17,9 +17,9 @@ namespace OuvICEx.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<User>> Get()
+        public IEnumerable<User> Get()
         {
-            return await _userService.GetAllUsersAsync();
+            return _userService.GetAllUsers();
         }
 
         //[HttpPost]

@@ -17,9 +17,9 @@ namespace OuvICEx.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Publication>> Get()
+        public IEnumerable<Publication> Get()
         {
-            return await _publicationService.GetAllPublicationsAsync();
+            return _publicationService.GetAllPublications();
         }
     }
 }
