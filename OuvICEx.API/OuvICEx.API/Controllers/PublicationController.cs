@@ -34,7 +34,7 @@ namespace OuvICEx.API.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult CreatePublication(PublicationModel publicationModel)
+        public IActionResult CreatePublication(PublicationCreationModel publicationModel)
         {
             var publication = _publicationService.CreatePublication(publicationModel);
             return CreatedAtAction(nameof(GetPublicationById), new { id = publication.Id }, publication);

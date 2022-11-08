@@ -5,9 +5,9 @@ namespace OuvICEx.API.Domain.Interfaces.Service
 {
     public interface IPublicationService
     {
-        public Publication? GetPublicationById(int id);
-        public IEnumerable<Publication> GetAllPublications();
+        public PublicationModel? GetPublicationById(int id);
+        public IEnumerable<PublicationModel> GetAllPublications();
 
-        public Publication CreatePublication(PublicationModel publicationModel);
+        public Publication CreatePublication(PublicationCreationModel publicationModel);
     }
 }

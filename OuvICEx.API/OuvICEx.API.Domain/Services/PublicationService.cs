@@ -14,26 +14,62 @@ namespace OuvICEx.API.Domain.Services
             _repository = repository;
         }
 
-        public IEnumerable<Publication> GetAllPublications()
+        private string? GetUserDepartamentName(Publication publication)
         {
-            return _repository.GetAllEntities();
+            if (publication.User == null || publication.User.Departament == null)
+                return null;
+
+            return publication.User.Departament.Name;
         }
 
-        public Publication? GetPublicationById(int id)
+        private string? GetTargetDepartamentName(Publication publication)
         {
-            return _repository.FindByPrimaryKey(id);
+            return publication.TargetDepartament == null ? null : publication.TargetDepartament.Name;
         }
 
-        public Publication CreatePublication(PublicationModel publicationModel)
+        private PublicationModel ConvertPublicationToPublicationModel(Publication publication)
+        {
+            return new PublicationModel
+            {
+                Text = publication.Text,
+                Title = publication.Title,
+                Status = publication.Status,
+                Context = publication.Context,
+                CreatedAt = publication.CreatedAt,
+                AuthorDepartamentName = GetUserDepartamentName(publication),
+                TargetDepartamentName = GetTargetDepartamentName(publication)
+            };
+        }
+
+        public IEnumerable<PublicationModel> GetAllPublications()
+        {
+            var publications = _repository.GetAllEntities();
+
+            List<PublicationModel> models = new List<PublicationModel>();
+            foreach (var publication in publications)
+                models.Add(ConvertPublicationToPublicationModel(publication));
+
+            return models.AsEnumerable();
+        }
+
+        public PublicationModel? GetPublicationById(int id)
+        {
+            var publication = _repository.FindByPrimaryKey(id);
+            return publication == null ? null : ConvertPublicationToPublicationModel(publication);
+        }
+
+        public Publication CreatePublication(PublicationCreationModel publicationCreationModel)
         {
             Publication publication = new Publication
             {
-                Title = publicationModel.Title,
-                Text = publicationModel.Text,
-                Status = publicationModel.Status,
-                Context = publicationModel.Context,
-                PermissionToPublicate = publicationModel.PermissionToPublicate,
-                CreatedAt = DateTime.Now
+                Text = publicationCreationModel.Text,
+                Title = publicationCreationModel.Title,
+                Status = publicationCreationModel.Status,
+                Context = publicationCreationModel.Context,
+                PermissionToPublicate = publicationCreationModel.PermissionToPublicate,
+                CreatedAt = DateTime.Now,
+                UserId = publicationCreationModel.UserId,
+                TargetDepartamentId = publicationCreationModel.TargetDepartamentId
             };
 
             _repository.AddEntity(publication);
