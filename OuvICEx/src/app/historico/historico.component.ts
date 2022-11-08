@@ -13,6 +13,7 @@ export class HistoricoComponent implements OnInit {
 
   constructor(private getPostsService: GetPostsService, private formBuilder: FormBuilder) { }
   posts: Post[] = [];
+  who: string = "Todas as Postagens";
 
 
 
@@ -32,28 +33,55 @@ export class HistoricoComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm(new Filter());
-    this.getPostsService.getPosts().subscribe((result: Post[]) => {this.posts = result;console.log(this.posts)});
+    this.getPostsService.getPosts().subscribe((result: Post[]) => {
+      this.posts = [];
+      for(let post of result){
+        if(post.context == '0'){
+          post.context = "Sugestão";
+        }
+        else if(post.context == '1'){
+          post.context = "Elogio";
+        }
+        else if(post.context = '2'){
+          post.context = "Reclamação";
+        }
+        else{
+          post.context = "Context Não Informado";
+        }
+
+        if(post.status == '0'){
+          post.status = "Resolvido";
+        }
+        else if(post.status == '1'){
+          post.status = "Não Resolvido";
+        }
+        else if(post.status == '2'){
+          post.status = "Em Progresso";
+        }
+        else{
+          post.status = "Status Não Informado"
+        }
+        post.createdAt = new Date(post.createdAt).toLocaleString()
+        this.posts.push(post);
+      }
+      console.log(this.posts)
+    });
     console.log(this.posts);
 
-    let a = new Post();
-    a.authorDepartment = 'DCC';
-    a.content = 'Salas Totalmente Defesadas';
-    a.context = 'Reclamação';
-    a.createdDate = '13/09/2022';
-    a.isResolved = false;
-    a.isVisible = true;
-    a.targetDepartment = 'DCC';
 
-    let b = new Post();
-    b.authorDepartment = 'e';
-    b.content = 'f';
-    b.context = 'g';
-    b.createdDate = '2';
-    b.isResolved = false;
-    b.isVisible = true;
-    b.targetDepartment = 'h';
+    let d = new Post();
+    d.title = 'k';
+    d.authorDepartamentName = 'e';
+    d.text = 'f';
+    d.context = 'g';
+    d.createdAt = '2';
+    d.status = "Resolvido";
+    d.isVisible = true;
+    d.targetDepartamentName = 'h';
 
-    this.posts = [a,b];
+
+
+    this.posts = [d];
     console.log('oi');
 
 
@@ -66,6 +94,16 @@ export class HistoricoComponent implements OnInit {
 
     // Usar o método reset para limpar os controles na tela
     // this.reclameForm.reset(new Reclame());
+  }
+
+  public toggle(){
+    if(this.who == "Todas as Postagens"){
+      this.who = "Minhas Postagens";
+    }
+    else{
+      this.who = "Todas as Postagens";
+    }
+
   }
 
 }

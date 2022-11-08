@@ -1,12 +1,13 @@
 export class Post{
     //id?: number;
-    content = "";
+    title = "";
+    text = "";
     context = "";
     //author = "";
-    authorDepartment  = "";
-    targetDepartment = "";
-    createdDate = "";
+    authorDepartamentName  = "";
+    targetDepartamentName = "";
+    createdAt = "";
     isVisible?:  boolean;
-    isResolved?: boolean;
+    status = "";
 
 }

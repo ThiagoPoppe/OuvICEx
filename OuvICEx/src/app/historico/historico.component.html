@@ -1,9 +1,21 @@
+
 <body style="margin:0px!important;padding:0px!important;">
-    <div class="alt-background-color" >
+    <div class="alt-background-color" style="width:100%">
         <div style="padding-top:15px;padding-left:100px;padding-right:100px">
             <h1 class="title-color">Histórico</h1>
             <hr>
-            <form [formGroup]="FilterForm" (ngSubmit)="onSubmit()" style="display:flex;padding:0rem;">         
+            <form [formGroup]="FilterForm" (ngSubmit)="onSubmit()" style="display:flex;padding:0rem;">
+                <div class="form-group" style="padding-right:0px;margin-right:0px;width:auto;">
+                    <label class="switch">
+                        <input id="a" type="checkbox" (click)="toggle()">
+                        <span class="slider round"></span>
+                    </label>  
+                </div>
+                <div id="who" class="form-group" style="width:auto;">
+                    {{who}}
+                </div>
+
+                       
                 <div class="form-group">
                     <select style="padding-left:0rem!important;" type="form-control" class="form-control" name="DepartamentoReferenciado" id="DepartamentoReferenciado" formControlName="targetDepartment" placeholder="Departamento">
                         <option value="" disabled selected>Departamento Referenciado</option>
@@ -38,7 +50,7 @@
                 </div>
                 <p style="padding-top:0.4rem;">de</p>
                 <div class="form-group" style="width:7vw;padding-top:1rem;">
-                    <input type="date" class="form-control" name="SatrtDate" id="SatrtDate" formControlName="startDate">
+                    <input type="date" class="form-control" name="StartDate" id="StartDate" formControlName="startDate">
                     <br>
                 </div>
                 <p style="padding-top:0.4rem;">a</p>
@@ -56,14 +68,20 @@
     </div>
     <div class='background-color' style="min-height:59vh;">
         <div class="grid-container">
-            <div class="grid-item" *ngFor = "let post of posts">
-                <h4 style="text-align:left;font-size:16px;">{{post.content}}</h4>
-                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;font-size:16px;">• Departamento do Autor: {{ post.authorDepartment }}</p>
-                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;font-size:16px;">• Departamento Referenciado: {{ post.targetDepartment }}</p>
+            <div class="grid-item tooltip" *ngFor = "let post of posts">
+                <h4 style="text-align:left;font-size:16px;">{{post.title}}</h4>
+                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;font-size:16px;">• Departamento do Autor: {{ post.authorDepartamentName != null ?  post.authorDepartamentName : "Não Informado"}}</p>
+                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;font-size:16px;">• Departamento Referenciado: {{ post.targetDepartamentName != null ? post.targetDepartamentName : "Não Informado" }}</p>
                 <br>
-                <p class="text-color-light" style="padding-left:2rem;margin:0rem;text-align: left;font-size:14px;">Contexto: {{ post.content }}</p>
-                <p class="text-color-light" style="padding-left:2rem;margin:0rem;text-align: left;font-size:14px;">Situação:{{true==post.isResolved ? ' Resolvido, ': ' Não Resolvido, '}}{{ post.createdDate }}</p>
+                <p class="text-color-light" style="padding-left:2rem;margin:0rem;text-align: left;font-size:14px;">Contexto: {{ post.context }}</p>
+                <p class="text-color-light" style="padding-left:2rem;margin:0rem;text-align: left;font-size:14px;">Situação:{{post.status}}, {{ post. createdAt }}</p>
+                
+                <div class="tooltiptext grid-item">
+                    <h4 style="text-align:left;font-size:16px;padding-left:1rem;">{{post.title}}</h4>
+                    <p style="text-align:left;font-size:16px; padding-left:1rem;">{{post.text}}</p>
+                </div>
             </div>
         </div>
     </div>
+
 </body>

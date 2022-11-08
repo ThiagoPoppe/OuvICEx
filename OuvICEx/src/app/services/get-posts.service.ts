@@ -9,13 +9,17 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class GetPostsService {
 
-  url = "SearchPosts/get_posts_based_on_selection_filter";
+  url = "Publication"
   constructor(private http: HttpClient) { }
 
 
 
   public getPosts(): Observable<Post[]>{
-    return this.http.get<Post[]>(`${environment.apiUrl}/${this.url}`);
+    console.log(`${environment.apiUrl}/${this.url}/get_all_visible_publications`);
+
+    let a = this.http.get<Post[]>(`${environment.apiUrl}/${this.url}/get_all_visible_publications`);
+    console.log(a);
+    return a;
   }
 
 }

@@ -26,7 +26,7 @@
   }
 
   .toolbar {
-    position: absolute;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -58,7 +58,6 @@
   .content {
     
     display: flex;
-    margin: 28px auto;
     flex-direction: column;
     align-items: center;
   }
@@ -115,7 +114,7 @@
 
 <router-outlet></router-outlet>
 
-<div class="footer alt-background-color" role="footer">
+<footer class="footer alt-background-color" role="footer">
   <div style="display:flex;">
     <div style="padding-right:25vw;padding-left:30vw;text-align:center;padding-top:2vh;">
       <p style="text-align:center;justify-content:center;">Projeto Final da Disciplina Prática em Desenvolvimento de Software</p>
@@ -129,4 +128,4 @@
       />
     </div>
   </div>
-</div>
+</footer>

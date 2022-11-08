@@ -49,7 +49,16 @@ export class EstatisticaComponent implements OnInit {
         ]
       },
       options: {
-        aspectRatio:2.5
+        aspectRatio:1.5,
+        plugins: {
+          title: {
+              display: true,
+              text: 'Departamento Referenciado nas Reclamações Enviadas',
+              padding: {
+                  bottom: 10
+              }
+          }
+        }
       }
       
     });
@@ -81,7 +90,16 @@ export class EstatisticaComponent implements OnInit {
         ]
       },
       options: {
-        aspectRatio:2.5
+        aspectRatio:1.5,
+        plugins: {
+          title: {
+              display: true,
+              text: 'Departamento Referenciado nas Reclamações Enviadas',
+              padding: {
+                  bottom: 10
+              }
+          }
+        }
       }
       
     });
@@ -98,12 +116,21 @@ export class EstatisticaComponent implements OnInit {
           {
             label: "Issues",
             data: ['3', '2'],
-            backgroundColor: 'blue'
+            backgroundColor: 'green'
           },
         ]
       },
       options: {
-        aspectRatio:2.5
+        aspectRatio:1.5,
+        plugins: {
+          title: {
+              display: true,
+              text: 'Contexto das Reclamações Enviadas',
+              padding: {
+                  bottom: 10
+              }
+          }
+        }
       }
       
     });
