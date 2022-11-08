@@ -26,17 +26,17 @@ namespace OuvICEx.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Publication), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPublicationById(int id)
+        public IActionResult GetPublicationById(int id)
         {
-            var publication = await _publicationService.GetPublicationByIdAsync(id);
+            var publication = _publicationService.GetPublicationById(id);
             return publication == null ? NotFound() : Ok(publication);
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<IActionResult> CreatePublication(PublicationModel publicationModel)
+        public IActionResult CreatePublication(PublicationModel publicationModel)
         {
-            var publication = await _publicationService.CreatePublicationAsync(publicationModel);
+            var publication = _publicationService.CreatePublication(publicationModel);
             return CreatedAtAction(nameof(GetPublicationById), new { id = publication.Id }, publication);
         }
     }

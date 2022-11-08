@@ -19,12 +19,12 @@ namespace OuvICEx.API.Domain.Services
             return _repository.GetAllEntities();
         }
 
-        public async Task<Publication?> GetPublicationByIdAsync(int id)
+        public Publication? GetPublicationById(int id)
         {
-            return await _repository.GetPublicationByIdAsync(id);
+            return _repository.FindByPrimaryKey(id);
         }
 
-        public async Task<Publication> CreatePublicationAsync(PublicationModel publicationModel)
+        public Publication CreatePublication(PublicationModel publicationModel)
         {
             Publication publication = new Publication
             {
@@ -36,7 +36,8 @@ namespace OuvICEx.API.Domain.Services
                 CreatedAt = DateTime.Now
             };
 
-            return await _repository.CreatePublicationAsync(publication);
+            _repository.AddEntity(publication);
+            return publication;
         }
     }
 }
