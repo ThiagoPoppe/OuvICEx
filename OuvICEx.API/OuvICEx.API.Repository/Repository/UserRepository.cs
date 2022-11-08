@@ -4,9 +4,9 @@ using OuvICEx.API.Repository.Data;
 
 namespace OuvICEx.API.Repository.Repository
 {
-    public class PublicationRepository : RepositoryBase<Publication>, IPublicationRepository
+    public class UserRepository : RepositoryBase<User>, IUserRepository
     {
-        public PublicationRepository(OuvICExDbContext context)
+        public UserRepository(OuvICExDbContext context)
             : base(context) { }
     }
 }

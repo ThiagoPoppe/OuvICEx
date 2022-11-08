@@ -11,7 +11,7 @@ namespace OuvICEx.API.Domain.Entities
 
         [Required]
         [StringLength(1080, ErrorMessage = "{0} length must be less than {1}")]
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         [Required]
         public PublicationStatus Status { get; set; }
@@ -25,14 +25,14 @@ namespace OuvICEx.API.Domain.Entities
         [Required]
         public DateTime CreatedAt { get; set; }
 
-        //public int? UserId { get; set; }
-        //public int? TargetDepartamentId { get; set; }
+        public int? UserId { get; set; }
+        public int? TargetDepartamentId { get; set; }
 
-        //[ForeignKey("UserId")]
-        //public User? User { get; set; }
+        [ForeignKey("UserId")]
+        public User? User { get; set; }
 
-        //[ForeignKey("TargetDepartamentId")]
-        //public Departament? TargetDepartament { get; set; }
+        [ForeignKey("TargetDepartamentId")]
+        public Departament? TargetDepartament { get; set; }
 
         [StringLength(32, ErrorMessage = "{0} length must be less than {1}")]
         public string? Title { get; set; }

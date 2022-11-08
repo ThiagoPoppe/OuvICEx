@@ -5,9 +5,10 @@ namespace OuvICEx.API.Domain.Interfaces.Service
 {
     public interface IPublicationService
     {
-        public Task<IEnumerable<Publication>> GetAllPublicationsAsync();
-        public Task<Publication?> GetPublicationByIdAsync(int id);
+        public PublicationModel? GetPublicationById(int id);
+        public IEnumerable<PublicationModel> GetAllPublications();
+        public IEnumerable<PublicationModel> GetAllVisiblePublications();
 
-        public Task<Publication> CreatePublicationAsync(PublicationModel publicationModel);
+        public Publication CreatePublication(PublicationCreationModel publicationModel);
     }
 }

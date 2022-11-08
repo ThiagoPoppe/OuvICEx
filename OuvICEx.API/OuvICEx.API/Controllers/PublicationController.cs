@@ -17,26 +17,32 @@ namespace OuvICEx.API.Controllers
             _publicationService = publicationService;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<Publication>> GetAllPublications()
+        [HttpGet("get_all_publications")]
+        public IEnumerable<PublicationModel> GetAllPublications()
         {
-            return await _publicationService.GetAllPublicationsAsync();
+            return _publicationService.GetAllPublications();
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(typeof(Publication), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPublicationById(int id)
+        [HttpGet("get_all_visible_publications")]
+        public IEnumerable<PublicationModel> GetAllVisiblePublications()
         {
-            var publication = await _publicationService.GetPublicationByIdAsync(id);
+            return _publicationService.GetAllVisiblePublications();
+        }
+
+        [HttpGet("find_publication_by_id/{id}")]
+        [ProducesResponseType(typeof(PublicationModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetPublicationById(int id)
+        {
+            var publication = _publicationService.GetPublicationById(id);
             return publication == null ? NotFound() : Ok(publication);
         }
 
-        [HttpPost]
+        [HttpPost("create_publication")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<IActionResult> CreatePublication(PublicationModel publicationModel)
+        public IActionResult CreatePublication([FromBody] PublicationCreationModel publicationCreationModel)
         {
-            var publication = await _publicationService.CreatePublicationAsync(publicationModel);
+            var publication = _publicationService.CreatePublication(publicationCreationModel);
             return CreatedAtAction(nameof(GetPublicationById), new { id = publication.Id }, publication);
         }
     }
