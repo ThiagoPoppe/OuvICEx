@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using OuvICEx.API.Domain.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using OuvICEx.API.Domain.Interfaces.Service;
 using OuvICEx.API.Domain.Models;
 
