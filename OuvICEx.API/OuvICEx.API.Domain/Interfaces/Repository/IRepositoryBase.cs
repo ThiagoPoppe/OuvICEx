@@ -1,21 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace OuvICEx.API.Domain.Interfaces.Repository
+﻿namespace OuvICEx.API.Domain.Interfaces.Repository
 {
     public interface IRepositoryBase<TEntity> where TEntity : class
     {
-        void Add(TEntity obj);
-        void Update(TEntity obj);
-        void Remove(TEntity obj);
-        void AddWithoutSave(TEntity obj);
-        void Dispose();
-        void SaveChanges();
+        public void SaveChanges();
+        public void AddEntity(TEntity obj);
+        public void UpdateEntity(TEntity obj);
+        public void RemoveEntity(TEntity obj);
 
-        TEntity FindByPrimaryKey(int id);
-        IEnumerable<TEntity> GetAll();
-        IQueryable<TEntity> GetQuery(IEnumerable<string> includes = null);
-
-        public void Attach(TEntity obj);
+        public TEntity? FindByPrimaryKey(int id);
+        public IEnumerable<TEntity> GetAllEntities();
+        public IQueryable<TEntity> GetQuery(IEnumerable<string>? includes = null);
     }
 }

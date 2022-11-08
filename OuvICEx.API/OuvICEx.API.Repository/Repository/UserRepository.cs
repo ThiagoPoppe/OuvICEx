@@ -11,7 +11,7 @@ namespace OuvICEx.API.Repository.Repository
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            return await Db.Users.ToListAsync();
+            return await _context.Users.ToListAsync();
         }
     }
 }

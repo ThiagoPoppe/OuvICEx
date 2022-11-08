@@ -5,56 +5,51 @@ using OuvICEx.API.Domain.Interfaces.Repository;
 namespace OuvICEx.API.Repository.Repository
 {
 
-    public abstract class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
+    public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
-        protected OuvICExDbContext Db;
+        protected OuvICExDbContext _context;
 
-        protected RepositoryBase(OuvICExDbContext db)
+        protected RepositoryBase(OuvICExDbContext context)
         {
-            Db = db;
+            _context = context;
         }
-
-        public void Add(TEntity obj)
-        {
-            Db.Set<TEntity>().Add(obj);
-            Db.SaveChanges();
-        }
-
-        public void Attach(TEntity obj)
-        {
-            Db.Attach<TEntity>(obj);
-        }
-
-        public void AddWithoutSave(TEntity obj)
-        {
-            Db.Set<TEntity>().Add(obj);
-        }
-
+        
         public void SaveChanges()
         {
-            Db.SaveChanges();
+            _context.SaveChanges();
         }
 
-        public void Update(TEntity obj)
+        public void AddEntity(TEntity obj)
         {
-            Db.Entry(obj).State = EntityState.Modified;
-            Db.SaveChanges();
+            _context.Set<TEntity>().Add(obj);
+            _context.SaveChanges();
         }
 
-        public void Remove(TEntity obj)
+        public void UpdateEntity(TEntity obj)
         {
-            Db.Set<TEntity>().Remove(obj);
-            Db.SaveChanges();
+            _context.Entry(obj).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
-        public void Dispose()
+        public void RemoveEntity(TEntity obj)
         {
-            Db.Dispose();
+            _context.Set<TEntity>().Remove(obj);
+            _context.SaveChanges();
         }
 
-        public IQueryable<TEntity> GetQuery(IEnumerable<string> includes = null)
+        public TEntity? FindByPrimaryKey(int id)
         {
-            var query = Db.Set<TEntity>().AsQueryable();
+            return _context.Set<TEntity>().Find(id);
+        }
+
+        public IEnumerable<TEntity> GetAllEntities()
+        {
+            return _context.Set<TEntity>().AsEnumerable();
+        }
+
+        public IQueryable<TEntity> GetQuery(IEnumerable<string>? includes = null)
+        {
+            var query = _context.Set<TEntity>().AsQueryable();
             if (includes != null)
             {
                 foreach (var include in includes)
@@ -63,22 +58,6 @@ namespace OuvICEx.API.Repository.Repository
                 }
             }
             return query;
-        }
-
-        public IEnumerable<TEntity> GetAll()
-        {
-            return Db.Set<TEntity>().AsEnumerable();
-        }
-
-        public TEntity FindByPrimaryKey(int id)
-        {
-            return Db.Set<TEntity>().Find(id);
-        }
-        public void DetachAllEntities()
-        {
-            var changedEntriesCopy = Db.ChangeTracker.Entries().ToList();
-            foreach (var entry in changedEntriesCopy)
-                entry.State = EntityState.Detached;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace OuvICEx.API.Repository.Repository
 
         public async Task<IEnumerable<Publication>> GetAllPublicationsAsync()
         {
-            return await Db.Publications.ToListAsync();
+            return await _context.Publications.ToListAsync();
         }
     }
 }
