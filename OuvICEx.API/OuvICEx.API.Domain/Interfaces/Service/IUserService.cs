@@ -5,7 +5,7 @@ namespace OuvICEx.API.Domain.Interfaces.Service
 {
     public interface IUserService
     {
-        public IEnumerable<User> GetAllUsers();
-        public void CreateUser(UserModel user);
+        public IEnumerable<UserModel> GetAllUsers();
+        public void CreateUser(UserCreationModel user);
     }
 }

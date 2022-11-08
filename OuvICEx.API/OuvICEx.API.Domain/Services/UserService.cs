@@ -25,12 +25,13 @@ namespace OuvICEx.API.Domain.Services
             _mapper = configuration.CreateMapper();
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public IEnumerable<UserModel> GetAllUsers()
         {
-            return _repository.GetAllEntities();
+            var users = _repository.GetAllEntities();
+            return _mapper.Map<IEnumerable<UserModel>>(users);
         }
 
-        public void CreateUser(UserModel user)
+        public void CreateUser(UserCreationModel user)
         {
             ValidateEmail(user.Email);
             ValidatePassword(user.Password);

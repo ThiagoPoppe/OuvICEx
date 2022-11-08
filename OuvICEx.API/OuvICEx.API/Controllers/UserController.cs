@@ -17,14 +17,29 @@ namespace OuvICEx.API.Controllers
             _userService = userService;
         }
 
+        //[HttpGet]
+        //public ActionResult<IEnumerable<UserModel>> Get()
+        //{   
+        //    try
+        //    {
+        //        var users = _userService.GetAllUsers();
+        //        return Ok(users);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return StatusCode(500);
+        //    }
+        //}
+
         [HttpGet]
-        public IEnumerable<User> Get()
+        public IEnumerable<UserModel> Get()
         {
-            return _userService.GetAllUsers();
+                return _userService.GetAllUsers();
+
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] UserModel user)
+        public ActionResult Post([FromBody] UserCreationModel user)
         {
             try
             {
