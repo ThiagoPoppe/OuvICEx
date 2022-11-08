@@ -18,9 +18,9 @@ namespace OuvICEx.API.Domain.Services
             return  await _repository.GetAllUsersAsync();
         }
 
-        public async void AddUserAsync(User user)
-        {
-            return await _repository.Add
-        }
+        //public async void AddUserAsync(User user)
+        //{
+        //    return await _repository.Add(user);
+        //}
     }
 }
