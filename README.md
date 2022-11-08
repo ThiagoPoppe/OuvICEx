@@ -95,3 +95,7 @@
     - Criar estrutura do banco de dados que relaciona o departamento e o email para qual postagens do tipo denúncia devem ser encaminhadas;
     - Criar página para que o administrador cadastre, edite e remova departamentos e seus emails para envio de denúncias;
     - Adicionar botão que encaminha automaticamente a postagem a qual ele está associado para o departamento alvo do comentário.
+    
+- Estrutura inicial do banco de dados:
+![WhatsApp Image 2022-10-27 at 11 03 54](https://user-images.githubusercontent.com/33262563/199514670-fa38b1af-8d16-497a-a240-fddd962d452a.jpeg)
+
