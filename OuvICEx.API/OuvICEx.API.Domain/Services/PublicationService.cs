@@ -2,6 +2,7 @@
 using OuvICEx.API.Domain.Interfaces.Repository;
 using OuvICEx.API.Domain.Entities;
 using OuvICEx.API.Domain.Models;
+using OuvICEx.API.Domain.Enums;
 
 namespace OuvICEx.API.Domain.Services
 {
@@ -52,6 +53,18 @@ namespace OuvICEx.API.Domain.Services
             return models.AsEnumerable();
         }
 
+        public IEnumerable<PublicationModel> GetAllVisiblePublications()
+        {
+            var publications = _repository.GetAllEntities();
+
+            List<PublicationModel> models = new List<PublicationModel>();
+            foreach (var publication in publications)
+                if (publication.PermissionToPublicate == true)
+                    models.Add(ConvertPublicationToPublicationModel(publication));
+
+            return models.AsEnumerable();
+        }
+
         public PublicationModel? GetPublicationById(int id)
         {
             var publication = _repository.FindByPrimaryKey(id);
@@ -64,7 +77,7 @@ namespace OuvICEx.API.Domain.Services
             {
                 Text = publicationCreationModel.Text,
                 Title = publicationCreationModel.Title,
-                Status = publicationCreationModel.Status,
+                Status = PublicationStatus.Unsolved,
                 Context = publicationCreationModel.Context,
                 PermissionToPublicate = publicationCreationModel.PermissionToPublicate,
                 CreatedAt = DateTime.Now,

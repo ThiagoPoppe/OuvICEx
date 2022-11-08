@@ -6,7 +6,6 @@ namespace OuvICEx.API.Domain.Models
     {
         public string Text { get; set; }
         
-        public PublicationStatus Status { get; set; }
         public PublicationContext Context { get; set; }
         
         public bool PermissionToPublicate { get; set; }

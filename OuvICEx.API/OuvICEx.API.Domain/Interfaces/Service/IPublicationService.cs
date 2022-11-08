@@ -7,6 +7,7 @@ namespace OuvICEx.API.Domain.Interfaces.Service
     {
         public PublicationModel? GetPublicationById(int id);
         public IEnumerable<PublicationModel> GetAllPublications();
+        public IEnumerable<PublicationModel> GetAllVisiblePublications();
 
         public Publication CreatePublication(PublicationCreationModel publicationModel);
     }

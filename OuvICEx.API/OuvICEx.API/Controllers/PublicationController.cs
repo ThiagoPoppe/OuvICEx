@@ -17,14 +17,20 @@ namespace OuvICEx.API.Controllers
             _publicationService = publicationService;
         }
 
-        [HttpGet]
-        public IEnumerable<Publication> Get()
+        [HttpGet("get_all_publications")]
+        public IEnumerable<PublicationModel> GetAllPublications()
         {
             return _publicationService.GetAllPublications();
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(typeof(Publication), StatusCodes.Status200OK)]
+        [HttpGet("get_all_visible_publications")]
+        public IEnumerable<PublicationModel> GetAllVisiblePublications()
+        {
+            return _publicationService.GetAllVisiblePublications();
+        }
+
+        [HttpGet("find_publication_by_id/{id}")]
+        [ProducesResponseType(typeof(PublicationModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetPublicationById(int id)
         {
@@ -32,11 +38,11 @@ namespace OuvICEx.API.Controllers
             return publication == null ? NotFound() : Ok(publication);
         }
 
-        [HttpPost]
+        [HttpPost("create_publication")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult CreatePublication(PublicationCreationModel publicationModel)
+        public IActionResult CreatePublication([FromBody] PublicationCreationModel publicationCreationModel)
         {
-            var publication = _publicationService.CreatePublication(publicationModel);
+            var publication = _publicationService.CreatePublication(publicationCreationModel);
             return CreatedAtAction(nameof(GetPublicationById), new { id = publication.Id }, publication);
         }
     }
