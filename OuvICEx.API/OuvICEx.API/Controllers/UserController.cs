@@ -17,25 +17,18 @@ namespace OuvICEx.API.Controllers
             _userService = userService;
         }
 
-        //[HttpGet]
-        //public ActionResult<IEnumerable<UserModel>> Get()
-        //{   
-        //    try
-        //    {
-        //        var users = _userService.GetAllUsers();
-        //        return Ok(users);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return StatusCode(500);
-        //    }
-        //}
-
         [HttpGet]
-        public IEnumerable<UserModel> Get()
+        public ActionResult Get()
         {
-                return _userService.GetAllUsers();
-
+            try
+            {
+                var users = _userService.GetAllUsers();
+                return Ok(users);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpPost]
@@ -47,8 +40,7 @@ namespace OuvICEx.API.Controllers
                 return Ok();
             }
             catch (BadHttpRequestException e)
-            {
-                
+            {                
                 return StatusCode(403, e.Message);
             }
             catch (Exception)

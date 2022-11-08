@@ -38,11 +38,15 @@ namespace OuvICEx.API.Domain.Services
             
             _repository.AddEntity(_mapper.Map<User>(user));
         }
-        private static void ValidateEmail(string email)
+        private void ValidateEmail(string email)
         {
             if (!Regex.IsMatch(email, "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"))
             {
                 throw new BadHttpRequestException("Email format invalid");
+            }
+            if(_repository.GetUserByEmail(email) != null)
+            {
+                throw new BadHttpRequestException("User already exists.");
             }
         }
 
