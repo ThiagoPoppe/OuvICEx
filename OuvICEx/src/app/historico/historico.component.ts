@@ -14,6 +14,7 @@ export class HistoricoComponent implements OnInit {
   constructor(private getPostsService: GetPostsService, private formBuilder: FormBuilder) { }
   posts: Post[] = [];
   who: string = "Todas as Postagens";
+  warningText: String = ""
 
 
 
@@ -64,12 +65,18 @@ export class HistoricoComponent implements OnInit {
         post.createdAt = new Date(post.createdAt).toLocaleString()
         this.posts.push(post);
       }
+      if(this.posts.length == 0){
+        this.warningText = "Nenhuma publicação foi encontrada.";
+      }
+      else{
+        this.warningText = "";
+      }
       console.log(this.posts)
     });
     console.log(this.posts);
 
 
-    let d = new Post();
+    /*let d = new Post();
     d.title = 'k';
     d.authorDepartamentName = 'e';
     d.text = 'f';
@@ -79,9 +86,35 @@ export class HistoricoComponent implements OnInit {
     d.isVisible = true;
     d.targetDepartamentName = 'h';
 
+    let a = new Post();
+    a.title = 'kf';
+    a.authorDepartamentName = 'ed';
+    a.text = 'ff';
+    a.context = 'g';
+    a.createdAt = '2';
+    a.status = "Resolvido";
+    a.isVisible = true;
+    a.targetDepartamentName = 'h';
+
+    let b = new Post();
+    b.title = 'kfd';
+    b.authorDepartamentName = 'esd';
+    b.text = 'fff';
+    b.context = 'g';
+    b.createdAt = '2';
+    b.status = "Resolvido";
+    b.isVisible = true;
+    b.targetDepartamentName = 'h';
 
 
-    this.posts = [d];
+
+    this.posts = [d, a, b];*/
+    if(this.posts.length == 0){
+      this.warningText = "Nenhuma publicação foi encontrada.";
+    }
+    else{
+      this.warningText = "";
+    }
     console.log('oi');
 
 
