@@ -11,8 +11,8 @@ using OuvICEx.API.Repository.Data;
 namespace OuvICEx.API.Repository.Data.Migrations
 {
     [DbContext(typeof(OuvICExDbContext))]
-    [Migration("20221105002329_CreateUserTable")]
-    partial class CreateUserTable
+    [Migration("20221108145944_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,7 @@ namespace OuvICEx.API.Repository.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departament");
+                    b.ToTable("Departaments");
                 });
 
             modelBuilder.Entity("OuvICEx.API.Domain.Entities.Publication", b =>

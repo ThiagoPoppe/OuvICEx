@@ -10,7 +10,7 @@ using OuvICEx.API.Repository.Data;
 namespace OuvICEx.API.Repository.Data.Migrations
 {
     [DbContext(typeof(OuvICExDbContext))]
-    partial class PublicationDbContextModelSnapshot : ModelSnapshot
+    partial class OuvICExDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -30,7 +30,7 @@ namespace OuvICEx.API.Repository.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departament");
+                    b.ToTable("Departaments");
                 });
 
             modelBuilder.Entity("OuvICEx.API.Domain.Entities.Publication", b =>

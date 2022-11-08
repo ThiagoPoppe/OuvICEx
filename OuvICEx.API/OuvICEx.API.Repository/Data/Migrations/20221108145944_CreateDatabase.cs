@@ -1,15 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace OuvICEx.API.Repository.Data.Migrations
 {
-    public partial class CreateUserTable : Migration
+    public partial class CreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Departament",
+                name: "Departaments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -18,7 +19,25 @@ namespace OuvICEx.API.Repository.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Departament", x => x.Id);
+                    table.PrimaryKey("PK_Departaments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Publications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Text = table.Column<string>(type: "TEXT", maxLength: 1080, nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    Context = table.Column<int>(type: "INTEGER", nullable: false),
+                    PermissionToPublicate = table.Column<bool>(type: "INTEGER", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Title = table.Column<string>(type: "TEXT", maxLength: 32, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Publications", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,9 +56,9 @@ namespace OuvICEx.API.Repository.Data.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Departament_DepartamentId",
+                        name: "FK_Users_Departaments_DepartamentId",
                         column: x => x.DepartamentId,
-                        principalTable: "Departament",
+                        principalTable: "Departaments",
                         principalColumn: "Id");
                 });
 
@@ -52,10 +71,13 @@ namespace OuvICEx.API.Repository.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Publications");
+
+            migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Departament");
+                name: "Departaments");
         }
     }
 }
