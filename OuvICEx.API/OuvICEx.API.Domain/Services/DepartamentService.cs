@@ -31,6 +31,12 @@ namespace OuvICEx.API.Domain.Services
             return _mapper.Map<IEnumerable<DepartamentModel>>(departaments);
         }
 
+        public DepartamentModel GetDepartamentById(int id)
+        {
+            var departament = _repository.FindByPrimaryKey(id);
+            return _mapper.Map<DepartamentModel>(departament);
+        }
+
         public void CreateDepartament(DepartamentCreationModel departament)
         {            
             _repository.AddEntity(_mapper.Map<Departament>(departament));

@@ -7,5 +7,6 @@ namespace OuvICEx.API.Domain.Interfaces.Service
     {
         public IEnumerable<DepartamentModel> GetAllDepartaments();
         public void CreateDepartament(DepartamentCreationModel departament);
+        DepartamentModel GetDepartamentById(int id);
     }
 }

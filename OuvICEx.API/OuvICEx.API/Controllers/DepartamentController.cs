@@ -36,6 +36,13 @@ namespace OuvICEx.API.Controllers
 
         }
 
+        [HttpGet("{id}")]        
+        public DepartamentModel GetById(int id)
+        {
+            return _departamentService.GetDepartamentById(id);
+
+        }
+
         [HttpPost]
         public ActionResult Post([FromBody] DepartamentCreationModel departament)
         {
