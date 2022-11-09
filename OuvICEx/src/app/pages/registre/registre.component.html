@@ -1,6 +1,11 @@
 <form [formGroup]="registreForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
+        <label for="name">Nome</label><br>
+        <input type="text" class="form-control" name="name" id="name" formControlName="name"><br>
+    </div>
+
+    <div class="form-group">
         <label for="email">E-mail</label><br>
         <textarea class="form-control" rows="3" name="email" id="email" formControlName="email"></textarea><br>
     </div>
@@ -12,7 +17,9 @@
 
     <div class="form-group">
         <label for="userDepartament">Seu departamento</label><br>
-        <input type="text" class="form-control" name="userDepartament" id="userDepartament" formControlName="userDepartament"><br>
+        <select type="form-control" class="form-control" name="userDepartament" id="userDepartament" formControlName="userDepartament">
+            <option  *ngFor="let dep of departments" value={{dep.id}}>{{dep.name}}</option>
+        </select><br>
     </div>
 
     <!-- <div class="form-group">
