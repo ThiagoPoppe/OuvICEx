@@ -19,6 +19,7 @@ export class RegistreComponent implements OnInit {
 
   createForm(user: User){
     this.registreForm = this.formBuilder.group({
+      name: [user.Name],
       email: [user.Email],
       password: [user.Password],
       userDepartament: [user.DepartamentId],
@@ -29,14 +30,14 @@ export class RegistreComponent implements OnInit {
     // aqui você pode implementar a logica para fazer seu formulário salvar
 
     console.log("Enviou cadastro");
-    var user = new User();
-    user.Name = 'Giovanna Louzi'
-    user.Email = 'giovannalouzi@gmail.com';
-    user.Password = 'Senh@1';
-    user.DepartamentId = 1;
-    this.userService.postUser(user).subscribe(res => console.log(res));
-    // Usar o método reset para limpar os controles na tela
-    // this.reclameForm.reset(new Reclame());
+    var newUser = new User();
+    newUser.Name = this.registreForm.value.name;
+    newUser.Email = this.registreForm.value.email;
+    newUser.Password = this.registreForm.value.password;
+    newUser.DepartamentId = this.registreForm.value.userDepartament;
+    this.userService.postUser(newUser).subscribe(res => console.log(res));
+    
+    this.registreForm.reset(new User());
   }
 
 }
