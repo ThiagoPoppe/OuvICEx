@@ -41,6 +41,12 @@ namespace OuvICEx.API.Domain.Services
             return models.AsEnumerable();
         }
 
+        public IEnumerable<PublicationModel> GetPublicationsFromUser(int userId)
+        {
+            var publications = _repository.GetPublicationsFromUser(userId);
+            return _mapper.Map<IEnumerable<PublicationModel>>(publications);
+        }
+
         public PublicationModel? GetPublicationById(int id)
         {
             var publication = _repository.FindPublicationById(id);

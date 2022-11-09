@@ -27,5 +27,12 @@ namespace OuvICEx.API.Repository.Repository
             return GetQuery(foreignObjectNames)
                     .AsEnumerable();
         }
+
+        public IEnumerable<Publication> GetPublicationsFromUser(int userId)
+        {
+            return GetQuery(foreignObjectNames)
+                .Where(p => p.UserId == userId)
+                .AsEnumerable();
+        }
     }
 }

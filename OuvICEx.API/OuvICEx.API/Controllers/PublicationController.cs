@@ -27,6 +27,12 @@ namespace OuvICEx.API.Controllers
             return _publicationService.GetAllVisiblePublications();
         }
 
+        [HttpGet("get_publications_from_user/{userId}")]
+        public IEnumerable<PublicationModel> GetPublicationsFromUser(int userId)
+        {
+            return _publicationService.GetPublicationsFromUser(userId);
+        }
+
         [HttpGet("find_publication_by_id/{id}")]
         [ProducesResponseType(typeof(PublicationModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

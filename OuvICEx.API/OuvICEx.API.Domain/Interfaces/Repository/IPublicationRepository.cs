@@ -6,5 +6,6 @@ namespace OuvICEx.API.Domain.Interfaces.Repository
     {
         public Publication? FindPublicationById(int id);
         public IEnumerable<Publication> GetAllPublications();
+        public IEnumerable<Publication> GetPublicationsFromUser(int userId);
     }
 }
