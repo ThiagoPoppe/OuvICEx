@@ -2,8 +2,8 @@ export class Reclame{
     title = "";
     text = "";
     context?: number
-    authorDepartmentId?: number;
-    targetDepartmentId?: number;
+    authorDepartamentId?: number;
+    targetDepartamentId?: number;
     permissionToPublicate?: boolean;
     userId?: number;
 }

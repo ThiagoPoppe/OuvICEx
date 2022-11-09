@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reclame } from '../../models/reclame'
 import { CreatePostService } from '../../services/posts/create-post.service';
+import { DepartmentService } from '../../services/department/department.service';
+import { Department } from '../../models/department';
 
 @Component({
   selector: 'app-reclame',
@@ -10,10 +12,12 @@ import { CreatePostService } from '../../services/posts/create-post.service';
 })
 export class ReclameComponent implements OnInit {
   reclameForm!: FormGroup;
+  departments: Department[] = [];
 
-  constructor(private createPostService: CreatePostService, private formBuilder: FormBuilder) { }
+  constructor(private createPostService: CreatePostService, private getDepartmentsService: DepartmentService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.fetchDepartments();
     this.createForm(new Reclame());
   }
 
@@ -23,31 +27,40 @@ export class ReclameComponent implements OnInit {
       text: [reclame.text, [Validators.required]],
       context: [reclame.context],
       permissionToPublicate: [reclame.permissionToPublicate],
-      authorDepartmentId: [reclame.authorDepartmentId],
-      targetDepartmentId: [reclame.targetDepartmentId],
+      authorDepartamentId: [reclame.authorDepartamentId],
+      targetDepartamentId: [reclame.targetDepartamentId],
       userId: [reclame.userId]
     })
   }
 
-  onSubmit() {
-    // aqui você pode implementar a logica para fazer seu formulário salvar
-    // console.log("Enviou comentário");
-    // console.log(this.reclameForm.value)
+  fetchDepartments(){
+    this.getDepartmentsService.getDepartaments().subscribe((result: Department[])=>{
+      this.departments = [];
+      result.forEach(element =>{
+        if(element['name'] != '' && element['name'] != null){
+          this.departments.push(element);
+        }
+      })
+      console.log(this.departments);
+    });
+  }
 
+  onSubmit() {
     var newReclame = new Reclame()
     newReclame.title = this.reclameForm.value.title
     newReclame.text = this.reclameForm.value.text;
     newReclame.context = Number(this.reclameForm.value.context);
-    newReclame.authorDepartmentId = Number(this.reclameForm.value.authorDepartmentId);
-    newReclame.targetDepartmentId = Number(this.reclameForm.value.targetDepartmentId);
+    newReclame.authorDepartamentId = Number(this.reclameForm.value.authorDepartamentId);
+    newReclame.targetDepartamentId = Number(this.reclameForm.value.targetDepartamentId);
     newReclame.permissionToPublicate = this.reclameForm.value.permissionToPublicate;
     newReclame.userId = Number(this.reclameForm.value.userId);
 
     console.log(newReclame)
     this.createPostService.createPost(newReclame).subscribe(res => console.log(res));
 
-    // Usar o método reset para limpar os controles na tela
-    // this.reclameForm.reset(new Reclame());
-  }
+    alert('Postagem realizada com sucesso.');
 
+    // Usar o método reset para limpar os controles na tela
+    this.reclameForm.reset(new Reclame());
+  }
 }
