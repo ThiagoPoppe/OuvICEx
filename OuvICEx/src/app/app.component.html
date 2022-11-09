@@ -1,0 +1,136 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<style>
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .toolbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+  }
+
+  .toolbar img {
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo {
+    height: 40px;
+    margin: 0 8px;
+  }
+
+  .toolbar #youtube-logo {
+    height: 40px;
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo:hover,
+  .toolbar #youtube-logo:hover {
+    opacity: 0.8;
+  }
+
+  .content {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  a,
+  a:visited,
+  a:hover {
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: rgb(49, 142, 204);
+  }
+
+
+</style>
+
+<!-- Toolbar -->
+<div class="toolbar header-color" role="banner">
+  <img
+    width="100"
+    alt="Logo"
+    src="assets/logo.png"
+  />
+  <div style="justify-content:space-around; display:flex; width:45vw;">
+    <div>
+      <a class="header-text-color"routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <h4>Home</h4>
+      </a>
+    </div>
+    <div>
+      <a  class="header-text-color" routerLink="/historico" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <h4>Historico</h4>
+      </a>
+    </div>
+    <div>
+      <a  class="header-text-color" routerLink="/estatisticas" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <h4>Estatísticas</h4>
+      </a>
+    </div>
+    <div>
+      <a  class="header-text-color" routerLink="/reclame" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <h4>Envie Sua Reclamação</h4>
+      </a>
+    </div>
+    <div>
+      <a  class="header-text-color" routerLink="/registre" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <h4>Sing In</h4>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="content background-color" role="main">
+
+
+</div>
+
+
+<router-outlet></router-outlet>
+
+<footer class="footer alt-background-color" role="footer">
+  <div style="display:flex;">
+    <div style="padding-right:25vw;padding-left:30vw;text-align:center;padding-top:2vh;">
+      <p style="text-align:center;justify-content:center;">Projeto Final da Disciplina Prática em Desenvolvimento de Software</p>
+      <hr>
+    </div>
+    <div style="margin:0px;padding-top:1vh;">
+      <img
+        width="90"
+        alt="Logo"
+        src="assets/logo.png"
+      />
+    </div>
+  </div>
+</footer>
