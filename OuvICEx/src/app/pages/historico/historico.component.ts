@@ -205,6 +205,7 @@ export class HistoricoComponent implements OnInit {
   public toggle(){
     if(this.who == "Todas as Postagens"){
       this.who = "Minhas Postagens";
+      
       this.getPostsService.getUserPosts().subscribe((result: Post[]) => {
         this.processPosts(result);
       });
@@ -213,6 +214,11 @@ export class HistoricoComponent implements OnInit {
     }
     else{
       this.who = "Todas as Postagens";
+      if(localStorage.getItem('user') == null){
+        this.posts = [];
+        this.warningText = "Faça login para ver seus posts."
+        return;
+      }
       this.getPostsService.getPosts().subscribe((result: Post[]) => {
         this.processPosts(result);
       });

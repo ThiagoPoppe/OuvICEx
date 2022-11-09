@@ -54,6 +54,7 @@ export class ReclameComponent implements OnInit {
     newReclame.targetDepartamentId = Number(this.reclameForm.value.targetDepartamentId);
     newReclame.permissionToPublicate = this.reclameForm.value.permissionToPublicate;
     newReclame.userId = Number(this.reclameForm.value.userId);
+    localStorage.setItem('user', newReclame.userId.toString());
 
     console.log(newReclame)
     this.createPostService.createPost(newReclame).subscribe(res => console.log(res));

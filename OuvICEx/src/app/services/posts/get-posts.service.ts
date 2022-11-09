@@ -23,8 +23,10 @@ export class GetPostsService {
   }
 
   public getUserPosts(): Observable<Post[]>{
-    let id = "1";
-    console.log(`${environment.apiUrl}/${this.url}/get_all_visible_publications`);
+    let id = localStorage.getItem('user') ;
+    if(id == null){
+      id = '1';
+    }
 
     let a = this.http.get<Post[]>(`${environment.apiUrl}/${this.url}/get_publications_from_user/${id}`);
     console.log(a);
