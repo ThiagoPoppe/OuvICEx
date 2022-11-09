@@ -6,8 +6,18 @@ namespace OuvICEx.API.Repository.Repository
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
+        private readonly List<string> foreignObjectNames;
+
         public UserRepository(OuvICExDbContext context)
-            : base(context) { }
+            : base(context) 
+        {
+            foreignObjectNames = new List<string> { "Departament" };
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return GetQuery().AsEnumerable();
+        }
 
         public User? GetUserByEmail(string email)
         {

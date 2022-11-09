@@ -25,13 +25,13 @@ namespace OuvICEx.API.Domain.Services
 
         public IEnumerable<PublicationModel> GetAllPublications()
         {
-            var publications = _repository.GetAllEntities();
+            var publications = _repository.GetAllPublications();
             return _mapper.Map<IEnumerable<PublicationModel>>(publications);
         }
 
         public IEnumerable<PublicationModel> GetAllVisiblePublications()
         {
-            var publications = _repository.GetAllEntities();
+            var publications = _repository.GetAllPublications();
 
             List<PublicationModel> models = new List<PublicationModel>();
             foreach (var publication in publications)
@@ -43,7 +43,7 @@ namespace OuvICEx.API.Domain.Services
 
         public PublicationModel? GetPublicationById(int id)
         {
-            var publication = _repository.FindByPrimaryKey(id);
+            var publication = _repository.FindPublicationById(id);
             return publication == null ? null : _mapper.Map<PublicationModel>(publication);
         }
 

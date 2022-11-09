@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OuvICEx.API.Domain.Entities;
 using OuvICEx.API.Domain.Interfaces.Service;
 using OuvICEx.API.Domain.Models;
 

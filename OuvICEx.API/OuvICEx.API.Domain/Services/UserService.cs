@@ -27,7 +27,7 @@ namespace OuvICEx.API.Domain.Services
 
         public IEnumerable<UserModel> GetAllUsers()
         {
-            var users = _repository.GetAllEntities();
+            var users = _repository.GetAllUsers();
             return _mapper.Map<IEnumerable<UserModel>>(users);
         }
 
