@@ -29,16 +29,14 @@
         <div class="form-group">
             <label for="authorDepartamentId">Seu departamento</label><br>
             <select type="form-control" class="form-control" name="authorDepartamentId" id="authorDepartamentId" formControlName="authorDepartamentId">
-                <option value="1">DCC</option>
-                <option value="2">DMAT</option>
+                <option  *ngFor="let dep of departments" value={{dep.id}}>{{dep.name}}</option>
             </select><br>
         </div>
 
         <div class="form-group">
             <label for="targetDepartamentId">Departamento alvo</label><br>
             <select type="form-control" class="form-control" name="targetDepartamentId" id="targetDepartamentId" formControlName="targetDepartamentId">
-                <option value="1">DCC</option>
-                <option value="2">DMAT</option>
+                <option  *ngFor="let dep of departments" value={{dep.id}}>{{dep.name}}</option>
             </select><br>
         </div>
 

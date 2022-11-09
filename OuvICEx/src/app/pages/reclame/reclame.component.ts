@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reclame } from '../../models/reclame'
 import { CreatePostService } from '../../services/posts/create-post.service';
+import { DepartmentService } from '../../services/department/department.service';
+import { Department } from '../../models/department';
 
 @Component({
   selector: 'app-reclame',
@@ -10,10 +12,12 @@ import { CreatePostService } from '../../services/posts/create-post.service';
 })
 export class ReclameComponent implements OnInit {
   reclameForm!: FormGroup;
+  departments: Department[] = [];
 
-  constructor(private createPostService: CreatePostService, private formBuilder: FormBuilder) { }
+  constructor(private createPostService: CreatePostService, private getDepartmentsService: DepartmentService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.fetchDepartments();
     this.createForm(new Reclame());
   }
 
@@ -27,6 +31,18 @@ export class ReclameComponent implements OnInit {
       targetDepartamentId: [reclame.targetDepartamentId],
       userId: [reclame.userId]
     })
+  }
+
+  fetchDepartments(){
+    this.getDepartmentsService.getDepartaments().subscribe((result: Department[])=>{
+      this.departments = [];
+      result.forEach(element =>{
+        if(element['name'] != '' && element['name'] != null){
+          this.departments.push(element);
+        }
+      })
+      console.log(this.departments);
+    });
   }
 
   onSubmit() {
