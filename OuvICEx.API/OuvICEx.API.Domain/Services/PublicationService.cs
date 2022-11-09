@@ -2,88 +2,60 @@
 using OuvICEx.API.Domain.Interfaces.Repository;
 using OuvICEx.API.Domain.Entities;
 using OuvICEx.API.Domain.Models;
-using OuvICEx.API.Domain.Enums;
+using AutoMapper;
+using OuvICEx.API.Domain.Profiles;
 
 namespace OuvICEx.API.Domain.Services
 {
     public class PublicationService : IPublicationService
     {
+        private readonly IMapper _mapper;
         private readonly IPublicationRepository _repository;
 
         public PublicationService(IPublicationRepository repository)
         {
             _repository = repository;
-        }
 
-        private string? GetUserDepartamentName(Publication publication)
-        {
-            if (publication.User == null || publication.User.Departament == null)
-                return null;
-
-            return publication.User.Departament.Name;
-        }
-
-        private string? GetTargetDepartamentName(Publication publication)
-        {
-            return publication.TargetDepartament == null ? null : publication.TargetDepartament.Name;
-        }
-
-        private PublicationModel ConvertPublicationToPublicationModel(Publication publication)
-        {
-            return new PublicationModel
+            var configuration = new MapperConfiguration(cfg =>
             {
-                Text = publication.Text,
-                Title = publication.Title,
-                Status = publication.Status,
-                Context = publication.Context,
-                CreatedAt = publication.CreatedAt,
-                AuthorDepartamentName = GetUserDepartamentName(publication),
-                TargetDepartamentName = GetTargetDepartamentName(publication)
-            };
+                cfg.AddProfile<PublicationProfile>();
+            });
+            _mapper = configuration.CreateMapper();
         }
 
         public IEnumerable<PublicationModel> GetAllPublications()
         {
-            var publications = _repository.GetAllEntities();
-
-            List<PublicationModel> models = new List<PublicationModel>();
-            foreach (var publication in publications)
-                models.Add(ConvertPublicationToPublicationModel(publication));
-
-            return models.AsEnumerable();
+            var publications = _repository.GetAllPublications();
+            return _mapper.Map<IEnumerable<PublicationModel>>(publications);
         }
 
         public IEnumerable<PublicationModel> GetAllVisiblePublications()
         {
-            var publications = _repository.GetAllEntities();
+            var publications = _repository.GetAllPublications();
 
             List<PublicationModel> models = new List<PublicationModel>();
             foreach (var publication in publications)
                 if (publication.PermissionToPublicate == true)
-                    models.Add(ConvertPublicationToPublicationModel(publication));
+                    models.Add(_mapper.Map<PublicationModel>(publication));
 
             return models.AsEnumerable();
         }
 
+        public IEnumerable<PublicationModel> GetPublicationsFromUser(int userId)
+        {
+            var publications = _repository.GetPublicationsFromUser(userId);
+            return _mapper.Map<IEnumerable<PublicationModel>>(publications);
+        }
+
         public PublicationModel? GetPublicationById(int id)
         {
-            var publication = _repository.FindByPrimaryKey(id);
-            return publication == null ? null : ConvertPublicationToPublicationModel(publication);
+            var publication = _repository.FindPublicationById(id);
+            return publication == null ? null : _mapper.Map<PublicationModel>(publication);
         }
 
         public Publication CreatePublication(PublicationCreationModel publicationCreationModel)
         {
-            Publication publication = new Publication
-            {
-                Text = publicationCreationModel.Text,
-                Title = publicationCreationModel.Title,
-                Status = PublicationStatus.Unsolved,
-                Context = publicationCreationModel.Context,
-                PermissionToPublicate = publicationCreationModel.PermissionToPublicate,
-                CreatedAt = DateTime.Now,
-                UserId = publicationCreationModel.UserId,
-                TargetDepartamentId = publicationCreationModel.TargetDepartamentId
-            };
+            var publication = _mapper.Map<Publication>(publicationCreationModel);
 
             _repository.AddEntity(publication);
             return publication;

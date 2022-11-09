@@ -45,7 +45,5 @@ namespace OuvICEx.API.Domain.Services
         {            
             _repository.AddEntity(_mapper.Map<Departament>(departament));
         }
-        
-
     }
 }

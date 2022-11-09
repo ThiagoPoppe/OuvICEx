@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using OuvICEx.API.Domain.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using OuvICEx.API.Domain.Interfaces.Service;
 using OuvICEx.API.Domain.Models;
 
@@ -27,6 +25,12 @@ namespace OuvICEx.API.Controllers
         public IEnumerable<PublicationModel> GetAllVisiblePublications()
         {
             return _publicationService.GetAllVisiblePublications();
+        }
+
+        [HttpGet("get_publications_from_user/{userId}")]
+        public IEnumerable<PublicationModel> GetPublicationsFromUser(int userId)
+        {
+            return _publicationService.GetPublicationsFromUser(userId);
         }
 
         [HttpGet("find_publication_by_id/{id}")]

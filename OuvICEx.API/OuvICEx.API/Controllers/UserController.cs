@@ -18,6 +18,8 @@ namespace OuvICEx.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<UserModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult Get()
         {
             try
@@ -27,11 +29,23 @@ namespace OuvICEx.API.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
+        [HttpGet("{email}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetUserIdByEmail(string email)
+        {
+            var user = _userService.GetUserByEmail(email);
+            return user == null ? NotFound() : Ok(new {id = user.Id});
+        }
+
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult Post([FromBody] UserCreationModel user)
         {
             try
@@ -39,13 +53,13 @@ namespace OuvICEx.API.Controllers
                 _userService.CreateUser(user);
                 return Ok();
             }
-            catch (BadHttpRequestException e)
+            catch (BadHttpRequestException ex)
             {                
-                return StatusCode(403, e.Message);
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
             }
             catch (Exception)
             {
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
         }

@@ -27,8 +27,14 @@ namespace OuvICEx.API.Domain.Services
 
         public IEnumerable<UserModel> GetAllUsers()
         {
-            var users = _repository.GetAllEntities();
+            var users = _repository.GetAllUsers();
             return _mapper.Map<IEnumerable<UserModel>>(users);
+        }
+
+        public UserModel? GetUserByEmail(string email)
+        {
+            var user = _repository.GetUserByEmail(email);
+            return _mapper.Map<UserModel>(user);
         }
 
         public void CreateUser(UserCreationModel user)
@@ -38,6 +44,7 @@ namespace OuvICEx.API.Domain.Services
             
             _repository.AddEntity(_mapper.Map<User>(user));
         }
+
         private void ValidateEmail(string email)
         {
             if (!Regex.IsMatch(email, "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"))
@@ -57,6 +64,5 @@ namespace OuvICEx.API.Domain.Services
                 throw new BadHttpRequestException("Password must be at least 4 characters, no more than 8 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit.");
             }
         }
-
     }
 }

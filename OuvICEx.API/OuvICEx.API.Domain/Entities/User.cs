@@ -19,7 +19,7 @@ namespace OuvICEx.API.Domain.Entities
         [StringLength(32, ErrorMessage = "{0} length must be less than {1}")]
         public string? Password { get; set; }
 
-        public int? DepartmentId { get; set; }
+        public int? DepartamentId { get; set; }
 
         [ForeignKey("DepartamentId")]
         public Departament? Departament { get; set; }
