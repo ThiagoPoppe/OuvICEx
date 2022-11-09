@@ -1,54 +1,60 @@
 <body style="margin:0px!important;padding:0px!important;">
-    <div class="alt-background-color" style="width:100%">
+    <div class="alt-background-color" style="min-height:24vh;" >
         <div style="padding-top:15px;padding-left:100px;padding-right:100px">
             <h1 class="title-color">Envie sua reclamação</h1>
             <hr>
-            <form [formGroup]="reclameForm" (ngSubmit)="onSubmit()">
-
-                <div class="form-group">
-                    <label for="title">Título da postagem</label><br>
-                    <textarea class="form-control" rows="3" name="title" id="title" formControlName="title"></textarea><br>
-                </div>
-
-                <div class="form-group">
-                    <label for="text">Conteúdo da postagem</label><br>
-                    <textarea class="form-control" rows="3" name="text" id="text" formControlName="text"></textarea><br>
-                </div>
-
-                <div class="form-group">
-                    <label for="context">Contexto</label><br>
-                    <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
-                        <option value="0">Reclamação</option>
-                        <option value="1">Sugestão</option>
-                        <option value="2">Denúncia</option>
-                    </select><br>
-                </div>
-
-                <div class="form-group">
-                    <label for="authorDepartmentId">Seu departamento</label><br>
-                    <input type="number" class="form-control" name="authorDepartmentId" id="authorDepartmentId" formControlName="authorDepartmentId"><br>
-                </div>
-
-                <div class="form-group">
-                    <label for="targetDepartmentId">Departamento alvo</label><br>
-                    <input type="number" class="form-control" name="targetDepartmentId" id="targetDepartmentId" formControlName="targetDepartmentId"><br>
-                </div>
-
-                <div class="form-group">
-                    <input type="checkbox" class="form-check-input" name="permissionToPublicate" id="permissionToPublicate" value=True formControlName="permissionToPublicate">
-                    <label for="permissionToPublicate">Tornar postagem pública</label><br>
-                </div>
-
-                <div class="form-group">
-                    <label for="targetDepartmentId">userId</label><br>
-                    <input type="number" class="form-control" name="userId" id="userId" formControlName="userId"><br>
-                </div>
-                
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary mt-4 blue-btn" value="Enviar">
-                </div>    
-
-            </form>
         </div> 
-    </div>  
+    </div>
+    <form [formGroup]="reclameForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+
+        <div class="form-group">
+            <label for="title">Título da postagem</label><br>
+            <textarea class="form-control" rows="3" name="title" id="title" formControlName="title"></textarea><br>
+        </div>
+
+        <div class="form-group">
+            <label for="text">Conteúdo da postagem</label><br>
+            <textarea class="form-control" rows="3" name="text" id="text" formControlName="text"></textarea><br>
+        </div>
+
+        <div class="form-group">
+            <label for="context">Contexto</label><br>
+            <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
+                <option value="1">Sugestão</option>
+                <option value="2">Elogio</option>
+                <option value="3">Reclamação</option>
+            </select><br>
+        </div>
+
+        <div class="form-group">
+            <label for="authorDepartamentId">Seu departamento</label><br>
+            <select type="form-control" class="form-control" name="authorDepartamentId" id="authorDepartamentId" formControlName="authorDepartamentId">
+                <option value="1">DCC</option>
+                <option value="2">DMAT</option>
+            </select><br>
+        </div>
+
+        <div class="form-group">
+            <label for="targetDepartamentId">Departamento alvo</label><br>
+            <select type="form-control" class="form-control" name="targetDepartamentId" id="targetDepartamentId" formControlName="targetDepartamentId">
+                <option value="1">DCC</option>
+                <option value="2">DMAT</option>
+            </select><br>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" class="form-check-input" name="permissionToPublicate" id="permissionToPublicate" value=True formControlName="permissionToPublicate">
+            <label for="permissionToPublicate">Tornar postagem pública</label><br>
+        </div>
+
+        <div class="form-group">
+            <label for="userId">userId</label><br>
+            <input type="number" class="form-control" name="userId" id="userId" formControlName="userId"><br>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary mt-4 blue-btn" value="Enviar">
+        </div>    
+
+    </form>
 </body>  

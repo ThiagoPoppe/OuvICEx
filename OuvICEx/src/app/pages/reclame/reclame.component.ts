@@ -23,31 +23,24 @@ export class ReclameComponent implements OnInit {
       text: [reclame.text, [Validators.required]],
       context: [reclame.context],
       permissionToPublicate: [reclame.permissionToPublicate],
-      authorDepartmentId: [reclame.authorDepartmentId],
-      targetDepartmentId: [reclame.targetDepartmentId],
+      authorDepartamentId: [reclame.authorDepartamentId],
+      targetDepartamentId: [reclame.targetDepartamentId],
       userId: [reclame.userId]
     })
   }
 
   onSubmit() {
-    // aqui você pode implementar a logica para fazer seu formulário salvar
-    // console.log("Enviou comentário");
-    // console.log(this.reclameForm.value)
-
     var newReclame = new Reclame()
     newReclame.title = this.reclameForm.value.title
     newReclame.text = this.reclameForm.value.text;
     newReclame.context = Number(this.reclameForm.value.context);
-    newReclame.authorDepartmentId = Number(this.reclameForm.value.authorDepartmentId);
-    newReclame.targetDepartmentId = Number(this.reclameForm.value.targetDepartmentId);
+    newReclame.authorDepartamentId = Number(this.reclameForm.value.authorDepartamentId);
+    newReclame.targetDepartamentId = Number(this.reclameForm.value.targetDepartamentId);
     newReclame.permissionToPublicate = this.reclameForm.value.permissionToPublicate;
     newReclame.userId = Number(this.reclameForm.value.userId);
 
     console.log(newReclame)
     this.createPostService.createPost(newReclame).subscribe(res => console.log(res));
-
-    // Usar o método reset para limpar os controles na tela
-    // this.reclameForm.reset(new Reclame());
   }
 
 }
