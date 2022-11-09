@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { User } from 'src/app/models/user';
-import { Post } from 'src/app/models/post';
 
 const httpOptions = {
   headers: new HttpHeaders({
