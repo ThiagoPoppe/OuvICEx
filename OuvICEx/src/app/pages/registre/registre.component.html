@@ -17,7 +17,9 @@
 
     <div class="form-group">
         <label for="userDepartament">Seu departamento</label><br>
-        <input type="text" class="form-control" name="userDepartament" id="userDepartament" formControlName="userDepartament"><br>
+        <select type="form-control" class="form-control" name="userDepartament" id="userDepartament" formControlName="userDepartament">
+            <option  *ngFor="let dep of departments" value={{dep.id}}>{{dep.name}}</option>
+        </select><br>
     </div>
 
     <!-- <div class="form-group">
