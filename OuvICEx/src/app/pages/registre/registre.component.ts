@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user/user.service';
 import { User } from '../../models/user'
 
 @Component({
@@ -10,7 +11,7 @@ import { User } from '../../models/user'
 export class RegistreComponent implements OnInit {
   registreForm!: FormGroup;
   
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private userService: UserService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.createForm(new User()); 
@@ -18,17 +19,22 @@ export class RegistreComponent implements OnInit {
 
   createForm(user: User){
     this.registreForm = this.formBuilder.group({
-      email: [user.email],
-      password: [user.password],
-      userDepartment: [user.userDepartment],
-      admin: [user.admin]
+      email: [user.Email],
+      password: [user.Password],
+      userDepartament: [user.DepartamentId],
     })
   }
 
   onSubmit() {
     // aqui você pode implementar a logica para fazer seu formulário salvar
-    console.log("Enviou cadastro");
 
+    console.log("Enviou cadastro");
+    var user = new User();
+    user.Name = 'Giovanna Louzi'
+    user.Email = 'giovannalouzi@gmail.com';
+    user.Password = 'Senh@1';
+    user.DepartamentId = 1;
+    this.userService.postUser(user).subscribe(res => console.log(res));
     // Usar o método reset para limpar os controles na tela
     // this.reclameForm.reset(new Reclame());
   }
