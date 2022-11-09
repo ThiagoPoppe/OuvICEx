@@ -12,6 +12,12 @@ namespace OuvICEx.API.Domain.Profiles
         private bool HasUserAndDepartament(Publication publication)
             => publication.User != null && publication.User.Departament != null;
 
+        private int? ConvertUserIdAttribute(PublicationCreationModel publicationCreationModel)
+            => publicationCreationModel.UserId == 0 ? null : publicationCreationModel.UserId;
+        
+        private int? ConvertTargetDepartamentId(PublicationCreationModel publicationCreationModel)
+            => publicationCreationModel.TargetDepartamentId == 0 ? null : publicationCreationModel.TargetDepartamentId;
+
         public PublicationProfile()
         {
             CreateMap<Publication, PublicationModel>()
@@ -22,7 +28,9 @@ namespace OuvICEx.API.Domain.Profiles
                 .ForMember(f => f.Id, dest => dest.Ignore())
                 .ForMember(f => f.User, dest => dest.Ignore())
                 .ForMember(f => f.Status, dest => dest.Ignore())
-                .ForMember(f => f.TargetDepartament, dest => dest.Ignore());
+                .ForMember(f => f.TargetDepartament, dest => dest.Ignore())
+                .ForMember(f => f.UserId, dest => dest.MapFrom(src => ConvertUserIdAttribute(src)))
+                .ForMember(f => f.TargetDepartamentId, dest => dest.MapFrom(src => ConvertTargetDepartamentId(src)));
         }
     }
 }
