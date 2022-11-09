@@ -23,7 +23,7 @@ export class CreatePostService {
     console.log(`${environment.apiUrl}/${this.url}/create_publication`);
 
     let a = this.http.post<Reclame>(`${environment.apiUrl}/${this.url}/create_publication`, reclame, httpOptions);
-    // console.log(a);
+    console.log(a);
     return a;
   }
 
