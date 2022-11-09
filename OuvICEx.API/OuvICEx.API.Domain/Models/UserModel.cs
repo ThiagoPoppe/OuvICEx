@@ -10,7 +10,7 @@ namespace OuvICEx.API.Domain.Models
 
         public string? Email { get; set; }
 
-        public int? DepartmentId { get; set; }
+        public int? DepartamentId { get; set; }
     }
 }
 
