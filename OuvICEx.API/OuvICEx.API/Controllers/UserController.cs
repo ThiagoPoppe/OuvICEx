@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OuvICEx.API.Domain.Entities;
 using OuvICEx.API.Domain.Interfaces.Service;
+using OuvICEx.API.Domain.Models;
 
 namespace OuvICEx.API.Controllers
 {
@@ -17,15 +18,37 @@ namespace OuvICEx.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<User> Get()
+        public ActionResult Get()
         {
-            return _userService.GetAllUsers();
+            try
+            {
+                var users = _userService.GetAllUsers();
+                return Ok(users);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
-        //[HttpPost]
-        //public async Task<IEnumerable<User>> Post([FromBody] User user)
-        //{
+        [HttpPost]
+        public ActionResult Post([FromBody] UserCreationModel user)
+        {
+            try
+            {
+                _userService.CreateUser(user);
+                return Ok();
+            }
+            catch (BadHttpRequestException e)
+            {                
+                return StatusCode(403, e.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
 
-        //}
+        }
+
     }
 }

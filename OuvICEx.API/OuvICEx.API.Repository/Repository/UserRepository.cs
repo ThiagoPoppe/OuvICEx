@@ -8,5 +8,10 @@ namespace OuvICEx.API.Repository.Repository
     {
         public UserRepository(OuvICExDbContext context)
             : base(context) { }
+
+        public User? GetUserByEmail(string email)
+        {
+            return GetQuery().FirstOrDefault(x => x.Email == email);
+        }
     }
 }

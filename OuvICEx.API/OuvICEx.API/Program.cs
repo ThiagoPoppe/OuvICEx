@@ -29,6 +29,9 @@ builder.Services.AddCors(options => options.AddPolicy(name: "posts",
         policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
     }));
 
+builder.Services.AddScoped<IDepartamentRepository, DepartamentRepository>();
+builder.Services.AddScoped<IDepartamentService, DepartamentService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
