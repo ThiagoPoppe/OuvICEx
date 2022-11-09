@@ -55,6 +55,8 @@ export class RegistreComponent implements OnInit {
     console.log(newUser)
     this.userService.postUser(newUser).subscribe(res => console.log(res));
     
+    alert('Formulário enviado.');
+
     this.registreForm.reset(new User());
   }
 }
