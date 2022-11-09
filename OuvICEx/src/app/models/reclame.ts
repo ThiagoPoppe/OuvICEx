@@ -1,7 +1,9 @@
 export class Reclame{
-    content: string = '';
-    context: string = '';
-    authorDepartment: string = '';
-    targetDepartment: string = '';
-    identify: string = '';
+    title = "";
+    text = "";
+    context?: number
+    authorDepartmentId?: number;
+    targetDepartmentId?: number;
+    permissionToPublicate?: boolean;
+    userId?: number;
 }
