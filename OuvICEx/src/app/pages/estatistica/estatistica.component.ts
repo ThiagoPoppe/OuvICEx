@@ -19,6 +19,7 @@ export class EstatisticaComponent implements OnInit {
   posts: Post[] = [];
   public chart: any;
   private type = 0
+  data = [''];
 
   FilterForm!: FormGroup;
 
@@ -31,19 +32,20 @@ export class EstatisticaComponent implements OnInit {
   ngOnInit(): void {
 
     this.createForm(new StatsForm());
-    this.getPostsService.getPosts().subscribe((result: Post[]) => {this.posts = result;console.log(this.posts)});
+    this.getPostsService.getPosts().subscribe((result: Post[]) => {this.posts = result;});
 
-    let dpt = this.getDepartmentStats();
     Chart.register(...registerables);
+    this.data=['1', '1', '1']
+    
     this.chart = new Chart("chart", {
       type: 'bar', //this denotes tha type of chart
 
       data: {// values on X-Axis
-        labels: ['DCC', 'DQ' ], 
+        labels: ['Eu', 'Sou um', 'Gráfico' ], 
 	       datasets: [
           {
             label: "Issues",
-            data: ['1', '4'],
+            data: this.data,
             backgroundColor: 'blue'
           },
         ]
@@ -53,7 +55,7 @@ export class EstatisticaComponent implements OnInit {
         plugins: {
           title: {
               display: true,
-              text: 'Departamento Referenciado nas Reclamações Enviadas',
+              text: 'Escolha o seu Gráfico',
               padding: {
                   bottom: 10
               }
@@ -62,7 +64,6 @@ export class EstatisticaComponent implements OnInit {
       }
       
     });
-
   }
 
   private getDepartmentStats(): number[] {
@@ -74,17 +75,29 @@ export class EstatisticaComponent implements OnInit {
     this.type = this.FilterForm.controls["type"]["value"];
   }
 
-  public showDpt(): void {
+  private getStatusData(posts: Post[]): string[]{
+    let data = [0,0,0]
+    for(let post of posts){
+      data[Number(post.status)] += 1;
+    }
+    let array = data.map(num => {
+      return num.toString();
+    });
+    return array;
+  }
+
+  public showStatus(): void {
     this.chart.destroy();
+    this.data = this.getStatusData(this.posts);
     this.chart = new Chart("chart", {
       type: 'bar', //this denotes tha type of chart
 
       data: {// values on X-Axis
-        labels: ['DCC', 'DQ' ], 
+        labels: ['Resolvido', 'Não Resolvido', 'Pendente' ], 
 	       datasets: [
           {
             label: "Issues",
-            data: ['1', '4'],
+            data: this.data,
             backgroundColor: 'blue'
           },
         ]
@@ -94,7 +107,7 @@ export class EstatisticaComponent implements OnInit {
         plugins: {
           title: {
               display: true,
-              text: 'Departamento Referenciado nas Reclamações Enviadas',
+              text: 'Situação Atual das Reclamações Enviadas',
               padding: {
                   bottom: 10
               }
@@ -105,17 +118,29 @@ export class EstatisticaComponent implements OnInit {
     });
   }
 
+  private getContextData(posts: Post[]): string[]{
+    let data = [0,0,0]
+    for(let post of posts){
+      data[Number(post.context)] += 1;
+    }
+    let array = data.map(num => {
+      return num.toString();
+    });
+    return array;
+  }
+
   public showContext(): void{
     this.chart.destroy();
+    this.data = this.getContextData(this.posts);
     this.chart = new Chart("chart", {
       type: 'bar', //this denotes tha type of chart
 
       data: {// values on X-Axis
-        labels: ['Reclamações', 'Elogios' ], 
+        labels: ['Sugestões', 'Elogios', 'Reclamções' ], 
 	       datasets: [
           {
             label: "Issues",
-            data: ['3', '2'],
+            data: this.data,
             backgroundColor: 'green'
           },
         ]

@@ -44,8 +44,8 @@ p{
     text-align: center;
     min-width: 25vw;
     max-width:25vw;
-    min-height: 22vh;
-    max-height: 22vh;
+    min-height: 24vh;
+    max-height: 60vh;
 }
 
 .blue-btn{
@@ -149,15 +149,20 @@ p{
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
-    min-width: 35vw;
-    max-width:35vw;
+    min-width: 30vw;
+    max-width:30vw;
     min-height: 32vh;
     max-height:60vh;
   
     /* Position the tooltip */
-    position:relative;
+    position:absolute;
     z-index: 1;
-    top:-21vh;
+    top:2vh;
+    left:-2vw;
+  }
+
+  .tooltip{
+    position:relative
   }
 
   .tooltip:after {

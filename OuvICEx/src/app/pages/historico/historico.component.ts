@@ -3,6 +3,8 @@ import { Post } from '../../models/post';
 import { Filter } from '../../models/filter';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GetPostsService } from 'src/app/services/posts/get-posts.service';
+import { DepartmentService } from 'src/app/services/department/department.service';
+import { Department } from 'src/app/models/department';
 
 @Component({
   selector: 'app-historico',
@@ -11,10 +13,12 @@ import { GetPostsService } from 'src/app/services/posts/get-posts.service';
 })
 export class HistoricoComponent implements OnInit {
 
-  constructor(private getPostsService: GetPostsService, private formBuilder: FormBuilder) { }
+  constructor(private getPostsService: GetPostsService, private getDepartmentsService: DepartmentService, private formBuilder: FormBuilder) { }
   posts: Post[] = [];
   who: string = "Todas as Postagens";
   warningText: String = ""
+  filter: Filter = new Filter;
+  departments = ['']
 
 
 
@@ -23,19 +27,59 @@ export class HistoricoComponent implements OnInit {
   createForm(filter: Filter){
     this.FilterForm = this.formBuilder.group({
       context: [filter.context],
-      authorDepartment: [filter.authorDepartment],
-      targetDepartment: [filter.targetDepartment],
-      isResolved: [filter.isResolved],
+      authorDepartamentName: [filter.authorDepartamentName],
+      targetDepartamentName: [filter.targetDepartamentName],
+      status: [filter.status],
       startDate: [filter.startDate],
       endDate: [filter.endDate]
     })
   }
 
+  fetchDepartments(){
+    this.getDepartmentsService.getDepartaments().subscribe((result: Department[])=>{
+      this.departments = [];
+      result.forEach(element =>{
+        if(element['name'] != '' && element['name'] != null){
+          this.departments.push(element['name']);
+        }
+        
+      })
+      console.log(this.departments);
+    });
+  }
 
-  ngOnInit(): void {
-    this.createForm(new Filter());
-    this.getPostsService.getPosts().subscribe((result: Post[]) => {
-      this.posts = [];
+  filterPost(post: Post): boolean{
+    console.log('filtrando');
+    console.log(post);
+    console.log(this.filter);
+    if(this.filter.authorDepartamentName != "" && this.filter.authorDepartamentName != null){
+      if(post.authorDepartamentName != this.filter.authorDepartamentName){
+        return false;
+      }
+    }
+
+    if(this.filter.targetDepartamentName != "" && this.filter.targetDepartamentName != null){
+      if(post.targetDepartamentName != this.filter.targetDepartamentName){
+        return false;
+      }
+    }
+
+    if(this.filter.context != "" && this.filter.context != null){
+      if(post.context != this.filter.context){
+        return false;
+      }
+    }
+
+    if(this.filter.status != "" && this.filter.status != null ){
+      if(post.status != this.filter.status){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  processPosts(result: Post[]){
+    this.posts = [];
       for(let post of result){
         if(post.context == '0'){
           post.context = "Sugestão";
@@ -62,8 +106,13 @@ export class HistoricoComponent implements OnInit {
         else{
           post.status = "Status Não Informado"
         }
+        if(post.title == ""){
+          post.title = post.context;
+        }
         post.createdAt = new Date(post.createdAt).toLocaleString()
-        this.posts.push(post);
+        if(this.filterPost(post)){
+          this.posts.push(post);
+        }
       }
       if(this.posts.length == 0){
         this.warningText = "Nenhuma publicação foi encontrada.";
@@ -71,10 +120,14 @@ export class HistoricoComponent implements OnInit {
       else{
         this.warningText = "";
       }
-      console.log(this.posts)
-    });
-    console.log(this.posts);
+  }
 
+
+  ngOnInit(): void {
+    this.fetchDepartments();
+    this.createForm(new Filter());
+    this.toggle();
+    
 
     /*let d = new Post();
     d.title = 'k';
@@ -124,6 +177,26 @@ export class HistoricoComponent implements OnInit {
     // aqui você pode implementar a logica para fazer seu formulário salvar
     console.log("Filtrou");
     console.log(this.FilterForm.controls);
+    this.filter = new Filter();
+    this.filter.authorDepartamentName = this.FilterForm.controls['authorDepartamentName'].value
+    this.filter.targetDepartamentName = this.FilterForm.controls['targetDepartamentName'].value
+    this.filter.context = this.FilterForm.controls['context'].value
+    this.filter.status = this.FilterForm.controls['status'].value
+    console.log(this.filter);
+    if(this.who == "Todas as Postagens"){
+      this.getPostsService.getPosts().subscribe((result: Post[]) => {
+        this.processPosts(result);
+      });
+      console.log(this.posts);
+  
+    }
+    else{
+      this.getPostsService.getUserPosts().subscribe((result: Post[]) => {
+        this.processPosts(result);
+      });
+      console.log(this.posts);
+  
+    }
 
     // Usar o método reset para limpar os controles na tela
     // this.reclameForm.reset(new Reclame());
@@ -132,9 +205,19 @@ export class HistoricoComponent implements OnInit {
   public toggle(){
     if(this.who == "Todas as Postagens"){
       this.who = "Minhas Postagens";
+      this.getPostsService.getUserPosts().subscribe((result: Post[]) => {
+        this.processPosts(result);
+      });
+      console.log(this.posts);
+  
     }
     else{
       this.who = "Todas as Postagens";
+      this.getPostsService.getPosts().subscribe((result: Post[]) => {
+        this.processPosts(result);
+      });
+      console.log(this.posts);
+  
     }
 
   }

@@ -17,35 +17,34 @@
 
                        
                 <div class="form-group">
-                    <select style="padding-left:0rem!important;" type="form-control" class="form-control" name="DepartamentoReferenciado" id="DepartamentoReferenciado" formControlName="targetDepartment" placeholder="Departamento">
-                        <option value="" disabled selected>Departamento Referenciado</option>
-                        <option value="1">DCC</option>
-                        <option value="2">Departamento de Química</option>
+                    <select style="padding-left:0rem!important;" type="form-control" class="form-control" name="DepartamentoReferenciado" id="DepartamentoReferenciado" formControlName="targetDepartamentName">
+                        <option value="" selected>Departamento Referenciado</option>
+                        <option  *ngFor="let dep of departments" value={{dep}}>{{dep}}</option>
                     </select><br>
                 </div>
             
                 <div class="form-group">
-                    <select type="form-control" class="form-control" name="DepartamentoAutor" id="DepartamentoAutor" formControlName="authorDepartment">
-                        <option value="" disabled selected>Departamento do Autor</option>
-                        <option value="1">DCC</option>
-                        <option value="2">Departamento de Química</option>
+                    <select  type="form-control" class="form-control" name="DepartamentoAutor" id="DepartamentoAutor" formControlName="authorDepartamentName">
+                        <option value="" selected>Departamento do Autor</option>
+                        <option  *ngFor="let dep of departments" value={{dep}}>{{dep}}</option>
                     </select><br>
                 </div>
 
                 <div class="form-group">
                     <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
-                        <option value="" disabled selected>Contexto</option>
-                        <option value="1">Reclamação</option>
-                        <option value="2">Sugestão</option>
-                        <option value="3">Denúncia</option>
+                        <option value="" selected>Contexto</option>
+                        <option value="Sugestão">Sugestão</option>
+                        <option value="Elogio">Elogio</option>
+                        <option value="Reclamação">Reclamação</option>
                     </select><br>
                 </div>
             
                 <div class="form-group">
-                    <select type="form-control" class="form-control" name="Situação" id="Situação" formControlName="isResolved">
-                        <option value="" disabled selected>s</option>
-                        <option value="1">Resolvido</option>
-                        <option value="2">Pendente</option>
+                    <select type="form-control" class="form-control" name="Situação" id="Situação" formControlName="status">
+                        <option value="" selected>situação</option>
+                        <option value="Resolvido">Resolvido</option>
+                        <option value="Não Resolvido">Não Resolvido</option>
+                        <option value="Pendente">Pendente</option>
                     </select><br>
                 </div>
                 <p style="padding-top:0.4rem;">de</p>
@@ -69,13 +68,16 @@
     <div class='background-color' style="min-height:59vh;">
         <div class="grid-container">
             {{warningText}}
-            <div class="grid-item tooltip" *ngFor = "let post of posts">
-                <h4 style="text-align:left;font-size:16px;">{{post.title}}</h4>
+            <div class="tooltip" *ngFor = "let post of posts">
+                <div class="grid-item">
+                    <h4 style="text-align:left;font-size:16px;">{{post.title}}</h4>
                 <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;font-size:16px;">• Departamento do Autor: {{ post.authorDepartamentName != null ?  post.authorDepartamentName : "Não Informado"}}</p>
                 <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;font-size:16px;">• Departamento Referenciado: {{ post.targetDepartamentName != null ? post.targetDepartamentName : "Não Informado" }}</p>
                 <br>
                 <p class="text-color-light" style="padding-left:2rem;margin:0rem;text-align: left;font-size:14px;">Contexto: {{ post.context }}</p>
                 <p class="text-color-light" style="padding-left:2rem;margin:0rem;text-align: left;font-size:14px;">Situação:{{post.status}}, {{ post. createdAt }}</p>
+                
+                </div>
                 
                 <div class="tooltiptext grid-item">
                     <h4 style="text-align:left;font-size:16px;padding-left:1rem;">{{post.title}}</h4>

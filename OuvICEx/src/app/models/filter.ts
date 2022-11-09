@@ -2,10 +2,10 @@ export class Filter{
     //id?: number;
     context = "";
     //author = "";
-    authorDepartment  = "";
-    targetDepartment = "";
+    authorDepartamentName  = "";
+    targetDepartamentName = "";
     startDate = "";
     endDate = "";
-    isResolved?: boolean;
+    status=""
 
 }
