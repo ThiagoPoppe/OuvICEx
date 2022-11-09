@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Post } from '../models/post';
 import {HttpClient} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GetPostsService {
+export class UserService {
 
-  url = "Publication"
+  url = "User"
   constructor(private http: HttpClient) { }
 
 
 
-  public getPosts(): Observable<Post[]>{
-    console.log(`${environment.apiUrl}/${this.url}/get_all_visible_publications`);
+  public getUser(): Observable<User[]>{
+    console.log(`${environment.apiUrl}/${this.url}`);
 
-    let a = this.http.get<Post[]>(`${environment.apiUrl}/${this.url}/get_all_visible_publications`);
+    let a = this.http.get<User[]>(`${environment.apiUrl}/${this.url}`);
     console.log(a);
     return a;
   }

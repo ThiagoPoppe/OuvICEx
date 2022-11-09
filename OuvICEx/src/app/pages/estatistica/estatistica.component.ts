@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from '../models/post';
-import { StatsForm } from '../models/statsForm';
-import { GetPostsService } from '../services/get-posts.service';
+import { Post } from '../../models/post';
+import { StatsForm } from '../../models/statsForm';
+import { GetPostsService } from '../../services/posts/get-posts.service';
 import {Chart} from 'chart.js';
 import { registerables } from 'chart.js'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

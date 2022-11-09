@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from '../models/post';
-import { Filter } from '../models/filter';
-import { GetPostsService } from '../services/get-posts.service';
+import { Post } from '../../models/post';
+import { Filter } from '../../models/filter';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GetPostsService } from 'src/app/services/posts/get-posts.service';
 
 @Component({
   selector: 'app-historico',

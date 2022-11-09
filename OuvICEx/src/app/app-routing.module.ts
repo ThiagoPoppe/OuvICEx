@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EstatisticaComponent } from './estatistica/estatistica.component';
-import { HistoricoComponent } from './historico/historico.component';
-import { HomeComponent } from './home/home.component';
-import { ReclameComponent } from './reclame/reclame.component';
-import { RegistreComponent } from './registre/registre.component';
+import { EstatisticaComponent } from './pages/estatistica/estatistica.component';
+import { HistoricoComponent } from './pages/historico/historico.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ReclameComponent } from './pages/reclame/reclame.component';
+import { RegistreComponent } from './pages/registre/registre.component';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
