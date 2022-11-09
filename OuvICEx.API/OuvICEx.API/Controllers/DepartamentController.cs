@@ -16,6 +16,8 @@ namespace OuvICEx.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<DepartamentModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult Get()
         {
             try
@@ -25,12 +27,14 @@ namespace OuvICEx.API.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
         }
 
-        [HttpGet("{id}")]        
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(DepartamentModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult GetById(int id)
         {
             try
@@ -38,18 +42,20 @@ namespace OuvICEx.API.Controllers
                 var departament = _departamentService.GetDepartamentById(id);
                 return Ok(departament);
             }
-            catch (BadHttpRequestException e)
+            catch (BadHttpRequestException ex)
             {
-                return StatusCode(400, e.Message);
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
             }
             catch (Exception)
             {
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult Post([FromBody] DepartamentCreationModel departament)
         {
             try
@@ -57,16 +63,14 @@ namespace OuvICEx.API.Controllers
                 _departamentService.CreateDepartament(departament);
                 return Ok();
             }
-            catch (BadHttpRequestException e)
+            catch (BadHttpRequestException ex)
             {
-                return StatusCode(403, e.Message);
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
             }
             catch (Exception)
             {
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
         }
-
     }
 }
