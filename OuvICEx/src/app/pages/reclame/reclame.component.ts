@@ -41,6 +41,10 @@ export class ReclameComponent implements OnInit {
 
     console.log(newReclame)
     this.createPostService.createPost(newReclame).subscribe(res => console.log(res));
-  }
 
+    alert('Postagem realizada com sucesso.');
+
+    // Usar o método reset para limpar os controles na tela
+    this.reclameForm.reset(new Reclame());
+  }
 }
