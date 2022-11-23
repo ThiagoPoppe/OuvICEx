@@ -243,3 +243,7 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Adding reports folder
+OuvICEx.API/OuvICEx.API.Tests/unittest_coverage_report/
+OuvICEx.API/OuvICEx.API.Tests/integration_coverage_report/
