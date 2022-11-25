@@ -28,4 +28,8 @@
     <ProjectReference Include="..\OuvICEx.API.Repository\OuvICEx.API.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Integration\" />
+  </ItemGroup>
+
 </Project>
