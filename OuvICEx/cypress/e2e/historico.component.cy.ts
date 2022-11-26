@@ -31,9 +31,8 @@ describe('example to-do app', () => {
         cy.get('#historico-btn').click()
         cy.url().should('include','historico')
 
-        cy.get('#own-posts').click()
-        cy.get('#grid').contains('Eu sou o Usuário 1')
-        cy.get('#grid').contains('Eu sou o Usuário 2').should('not.exist')
+        cy.get('#grid').contains('Eu Sou o Usuário 1')
+        cy.get('#grid').contains('Eu Sou o Usuário 2').should('not.exist')
     })
     
 
@@ -68,7 +67,6 @@ describe('example to-do app', () => {
         cy.get('#grid').children().contains('Test Title Private')
 
         cy.get('#own-posts').click()
-        cy.pause()
         cy.get('#grid').contains('Test Title Private').should('not.exist')
     })
 
@@ -118,27 +116,25 @@ describe('example to-do app', () => {
 
         cy.get('#submit-btn').click()
 
-        cy.pause()
 
         cy.get('#DepartamentoAutor').select('DMAT')
 
         cy.get('#submit-btn').click()
 
-        cy.pause()
 
         cy.get('#context').select('Reclamação')
 
         cy.get('#submit-btn').click()
 
-        cy.pause()
 
         cy.get('#own-posts').click()
-        cy.pause()
 
     })
 
     it('View Private Posts on Another Account', ()=>{
-        sessionStorage.setItem('user', '2')
+
+
+        localStorage.setItem('user', '2');
         cy.get('#historico-btn').click()
         cy.url().should('include','historico')
         
@@ -147,11 +143,17 @@ describe('example to-do app', () => {
         cy.get('#own-posts').click()
 
         cy.get('#grid').children().contains('Test Title Private').should('not.exist')
+
+        
     })
 
     it('Stats', ()=>{
         cy.get('#estatisticas-btn').click()
         cy.url().should('include','estatistica')
+
+        cy.get('#status').click()
+
+        cy.get('#context').click()
     })
     
 })
