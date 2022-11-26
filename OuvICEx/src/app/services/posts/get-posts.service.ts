@@ -26,6 +26,7 @@ export class GetPostsService {
     let id = localStorage.getItem('user') ;
     if(id == null){
       id = '1';
+      localStorage.setItem('user', '1');
     }
 
     let a = this.http.get<Post[]>(`${environment.apiUrl}/${this.url}/get_publications_from_user/${id}`);

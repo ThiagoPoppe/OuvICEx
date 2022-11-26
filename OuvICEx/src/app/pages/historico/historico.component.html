@@ -5,7 +5,7 @@
             <h1 class="title-color">Histórico</h1>
             <hr>
             <form [formGroup]="FilterForm" (ngSubmit)="onSubmit()" style="display:flex;padding:0rem;">
-                <div class="form-group" style="padding-right:0px;margin-right:0px;width:auto;">
+                <div id = 'own-posts' class="form-group" style="padding-right:0px;margin-right:0px;width:auto;">
                     <label class="switch">
                         <input id="a" type="checkbox" (click)="toggle()">
                         <span class="slider round"></span>
@@ -58,7 +58,7 @@
                     <br>
                 </div>
                 
-                <div style="padding:1rem;padding-right:0rem!important;margin-right: 0rem;">
+                <div style="padding:1rem;padding-right:0rem!important;margin-right: 0rem;" id="submit-btn">
                     <input type="submit" class="btn btn-primary mt-4 blue-btn" value="Filtrar">
                 </div>
             </form>
@@ -66,7 +66,7 @@
         
     </div>
     <div class='background-color' style="min-height:59vh;">
-        <div class="grid-container">
+        <div id="grid" class="grid-container">
             {{warningText}}
             <div class="tooltip" *ngFor = "let post of posts">
                 <div class="grid-item">
