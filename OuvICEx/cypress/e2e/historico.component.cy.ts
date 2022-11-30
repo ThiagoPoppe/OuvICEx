@@ -32,7 +32,9 @@ describe('example to-do app', () => {
         cy.url().should('include','historico')
 
         cy.get('#grid').contains('Eu Sou o Usuário 1')
+        cy.pause()
         cy.get('#grid').contains('Eu Sou o Usuário 2').should('not.exist')
+        cy.pause()
     })
     
 
@@ -55,6 +57,7 @@ describe('example to-do app', () => {
         cy.get('#submit-btn').click()
 
         cy.wait(2000)
+        cy.pause()
 
         cy.on('window:alert',(t)=>{
             //assertions
@@ -67,9 +70,11 @@ describe('example to-do app', () => {
         cy.url().should('include','historico')
 
         cy.get('#grid').children().contains('Test Title Private')
+        cy.pause()
 
         cy.get('#own-posts').click()
         cy.get('#grid').contains('Test Title Private').should('not.exist')
+        cy.pause()
     })
 
     it('Submit Public', ()=>{
@@ -93,6 +98,7 @@ describe('example to-do app', () => {
         cy.get('#submit-btn').click()
 
         cy.wait(2000)
+        cy.pause()
 
         cy.on('window:alert',(t)=>{
             //assertions
@@ -105,9 +111,11 @@ describe('example to-do app', () => {
         cy.url().should('include','historico')
 
         cy.get('#grid').children().contains('Test Title Public').should('not.exist')
+        cy.pause()
 
         cy.get('#own-posts').click()
         cy.get('#grid').children().contains('Test Title Public')
+        cy.pause()
     })
 
     it('Filters', ()=>{
@@ -115,23 +123,29 @@ describe('example to-do app', () => {
         cy.get('#historico-btn').click()
         cy.url().should('include','historico')
         cy.get('#own-posts').click()
+        cy.pause()
 
         cy.get('#DepartamentoReferenciado').select('DCC')
+        
 
         cy.get('#submit-btn').click()
+        cy.pause()
 
 
         cy.get('#DepartamentoAutor').select('DMAT')
 
         cy.get('#submit-btn').click()
+        cy.pause()
 
 
         cy.get('#context').select('Reclamação')
 
         cy.get('#submit-btn').click()
+        cy.pause()
 
 
         cy.get('#own-posts').click()
+        cy.pause()
 
     })
 
@@ -143,10 +157,12 @@ describe('example to-do app', () => {
         cy.url().should('include','historico')
         
         cy.get('#grid').children().contains('Test Title Private').should('not.exist')
+        cy.pause()
 
         cy.get('#own-posts').click()
 
         cy.get('#grid').children().contains('Test Title Private').should('not.exist')
+        cy.pause()
 
         
     })
