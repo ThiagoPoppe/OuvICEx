@@ -4,6 +4,7 @@ using OuvICEx.API.Domain.Entities;
 using OuvICEx.API.Domain.Models;
 using AutoMapper;
 using OuvICEx.API.Domain.Profiles;
+using OuvICEx.API.Domain.Exceptions;
 
 namespace OuvICEx.API.Domain.Services
 {
@@ -21,6 +22,15 @@ namespace OuvICEx.API.Domain.Services
                 cfg.AddProfile<PublicationProfile>();
             });
             _mapper = configuration.CreateMapper();
+        }
+
+        public void RemovePublicationById(int id)
+        {
+            var publication = _repository.FindPublicationById(id);
+            if (publication == null)
+                throw new PublicationNotFoundException($"publication with id {id} not found");
+
+            _repository.RemovePublication(publication);
         }
 
         public IEnumerable<PublicationModel> GetAllPublications()
