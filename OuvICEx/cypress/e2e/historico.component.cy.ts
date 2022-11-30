@@ -54,6 +54,8 @@ describe('example to-do app', () => {
 
         cy.get('#submit-btn').click()
 
+        cy.wait(2000)
+
         cy.on('window:alert',(t)=>{
             //assertions
             expect(t).to.contains('Enviado');
@@ -89,6 +91,8 @@ describe('example to-do app', () => {
         cy.get('#userId').type('2')
 
         cy.get('#submit-btn').click()
+
+        cy.wait(2000)
 
         cy.on('window:alert',(t)=>{
             //assertions
