@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OuvICEx.API.Domain.Exceptions;
 using OuvICEx.API.Domain.Interfaces.Service;
 using OuvICEx.API.Domain.Models;
 
@@ -48,6 +49,22 @@ namespace OuvICEx.API.Controllers
         {
             var publication = _publicationService.CreatePublication(publicationCreationModel);
             return CreatedAtAction(nameof(GetPublicationById), new { id = publication.Id }, publication);
+        }
+
+        [HttpDelete("delete_publication/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult RemovePublication(int id)
+        {
+            try
+            {
+                _publicationService.RemovePublicationById(id);
+                return NoContent();
+            }
+            catch (PublicationNotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }

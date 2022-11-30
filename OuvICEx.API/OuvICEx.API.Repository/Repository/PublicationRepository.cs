@@ -15,6 +15,11 @@ namespace OuvICEx.API.Repository.Repository
             foreignObjectNames = new List<string> { "User", "User.Departament", "TargetDepartament" };
         }
 
+        public void RemovePublication(Publication publication)
+        {
+            RemoveEntity(publication);
+        }
+
         public Publication? FindPublicationById(int id)
         {
             return GetQuery(foreignObjectNames)

@@ -5,6 +5,7 @@ namespace OuvICEx.API.Domain.Interfaces.Service
 {
     public interface IPublicationService
     {
+        public void RemovePublicationById(int id);
         public PublicationModel? GetPublicationById(int id);
         public IEnumerable<PublicationModel> GetAllPublications();
         public IEnumerable<PublicationModel> GetAllVisiblePublications();
