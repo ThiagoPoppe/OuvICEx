@@ -6,6 +6,7 @@ using OuvICEx.API.Domain.Models;
 using OuvICEx.API.Domain.Entities;
 using OuvICEx.API.Domain.Services;
 using OuvICEx.API.Domain.Interfaces.Repository;
+using OuvICEx.API.Domain.Exceptions;
 
 namespace OuvICEx.API.Tests.Unit
 {
@@ -198,6 +199,26 @@ namespace OuvICEx.API.Tests.Unit
             var publication = publicationService.CreatePublication(new PublicationCreationModel());
 
             Assert.IsType<Publication>(publication);
+        }
+
+        [Fact]
+        public void DeletePublicationThatExistsTest()
+        {
+            var publicationRepositoryMock = CreatePublicationRepositoryMock();
+            var publicationService = new PublicationService(publicationRepositoryMock.Object);
+               
+            // XUnit não possui um método para verificar se uma exceção não foi lançada. Esse é um "workaround".
+            var exception = Record.Exception(() => publicationService.RemovePublicationById(1));
+            Assert.Null(exception);
+        }
+
+        [Fact]
+        public void DeletePublicationThatDoesNotExistTest()
+        {
+            var publicationRepositoryMock = CreatePublicationRepositoryMock();
+            var publicationService = new PublicationService(publicationRepositoryMock.Object);
+
+            Assert.Throws<PublicationNotFoundException>(() => publicationService.RemovePublicationById(0));
         }
     }
 }
