@@ -23,6 +23,11 @@ builder.Services.AddScoped<IPublicationService, PublicationService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddCors(options => options.AddPolicy(name: "posts",
+    policy =>
+    {
+        policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+    }));
 
 builder.Services.AddScoped<IDepartamentRepository, DepartamentRepository>();
 builder.Services.AddScoped<IDepartamentService, DepartamentService>();
@@ -35,6 +40,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("posts");
 
 app.UseHttpsRedirection();
 

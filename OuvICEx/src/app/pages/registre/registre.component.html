@@ -1,0 +1,34 @@
+<form [formGroup]="registreForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <label for="name">Nome</label><br>
+        <input type="text" class="form-control" name="name" id="name" formControlName="name"><br>
+    </div>
+
+    <div class="form-group">
+        <label for="email">E-mail</label><br>
+        <textarea class="form-control" rows="3" name="email" id="email" formControlName="email"></textarea><br>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Senha</label><br>
+        <input type="password" class="form-control" name="password" id="password" formControlName="password"><br>
+    </div>
+
+    <div class="form-group">
+        <label for="userDepartament">Seu departamento</label><br>
+        <select type="form-control" class="form-control" name="userDepartament" id="userDepartament" formControlName="userDepartament">
+            <option  *ngFor="let dep of departments" value={{dep.id}}>{{dep.name}}</option>
+        </select><br>
+    </div>
+
+    <!-- <div class="form-group">
+        <label for="admin">Informo que serei administrador</label><br>
+        <input type="checkbbox" class="form-control" name="admin" id="admin" value=true formControlName="admin"><br>
+    </div> -->
+    
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary mt-4" value="Enviar">
+    </div>    
+
+</form>

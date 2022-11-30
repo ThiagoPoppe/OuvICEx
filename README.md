@@ -99,3 +99,58 @@
 - Estrutura inicial do banco de dados:
 ![WhatsApp Image 2022-10-27 at 11 03 54](https://user-images.githubusercontent.com/33262563/199514670-fa38b1af-8d16-497a-a240-fddd962d452a.jpeg)
 
+## Documentação da Arquitetura do Sistema
+Foi adotado a Arquitetura Hexagonal para o desenvolvimento do sistema OuvICEx. A Arquitetura Hexagonal, proposta por Alistair Cockburn, em meados dos anos 90, possui como principal objetivo construir um sistema que possui alta coesão, baixo acomplamento e com um certo grau de independência de tecnologias, aumentando assim a sua testabilidade.
+Além da Arquitetura Hexagonal, resolvemos adotar algumas ideias de DDD (_Domain-Driven Design_) para detalhar mais o domínio a ser desenvolvido. Em particular, utilizamos os conceitos de: Entidades, Serviços e Repositórios. 
+
+### Por que o sistema está adotando essa arquitetura?
+Além da sua adoção ter sido um requisito obrigatório do projeto da matéria Prática em Desenvolvimento de Software, escolhemos adotar essa arquitetura principalmente para aumentar a qualidade do código a ser desenvolvido.
+Ao separarmos o domínio da aplicação das tecnologias empregadas, garantimos um desenvolvimento mais "limpo", além de produzir um código mais modularizado. No mais, a sua adoção será fundamental para realizar a próxima sprint do projeto (desenvolvimento de testes) de forma bem feita, uma vez que a Arquitetura Hexagonal permite com que o sistema tenha mais testabilidade, justamente pelo domínio da aplicação ser livre de tecnologias.
+
+### Quais são as portas e adaptadores
+As portas da nossa arquitetura estão localizadas na pasta ``OuvICEx.API/OuvICEx.API.Domain/Interfaces``. Dentro dessa pasta temos interfaces (portas) para os Serviços (portas de entrada) e Repositório (portas de saída) do nosso projeto, separadas em suas respectivas pastas. A interface ``IPublicationService``, por exemplo, representa uma porta de entrada que será implementada para realizar as ações pertinentes à manipulação das publicações do nosso sistema, como por exemplo: criar uma publicação, recuperar uma publicação dado um Id, etc.
+```cs
+// Código da porta de entrada: IPublicationService
+namespace OuvICEx.API.Domain.Interfaces.Service
+{
+    public interface IPublicationService
+    {
+        public PublicationModel? GetPublicationById(int id);
+        public IEnumerable<PublicationModel> GetAllPublications();
+        public IEnumerable<PublicationModel> GetAllVisiblePublications();
+        public IEnumerable<PublicationModel> GetPublicationsFromUser(int userId);
+
+        public Publication CreatePublication(PublicationCreationModel publicationModel);
+    }
+}
+```
+
+Os adaptadores da nossa arquitetura estão localizados nas pastas ``OuvICEx.API/OuvICEx.API/Controllers`` e ``OuvICEx.API/OuvICEx.API.Repository/Repository``, utilizando as portas de entrada e saída, respectivamente, para realizar a comunicação com o domínio da aplicação. Os adaptadores situados na pasta ``Controllers`` adaptam uma comunicação com a interface do usuário via REST API, definido as rotas; já os adaptadores situados na pasta ``Repository`` adaptam a comunicação do domínio com o banco de dados utilizando SQLite.
+```cs
+// Pequeno trecho de um adaptador para a comunicação com a interface do usuário
+namespace OuvICEx.API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PublicationController : ControllerBase
+    {
+        private readonly IPublicationService _publicationService;
+        
+        // Fazemos uso de injeção de dependências para definir a implementação da porta
+        public PublicationController(IPublicationService publicationService)
+        {
+            _publicationService = publicationService;
+        }
+        
+        [HttpGet("find_publication_by_id/{id}")]
+        [ProducesResponseType(typeof(PublicationModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetPublicationById(int id)
+        {
+            var publication = _publicationService.GetPublicationById(id);
+            return publication == null ? NotFound() : Ok(publication);
+        }
+        ...
+    }
+}
+```

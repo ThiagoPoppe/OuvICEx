@@ -1,0 +1,90 @@
+
+<body style="margin:0px!important;padding:0px!important;">
+    <div class="alt-background-color" style="width:100%">
+        <div style="padding-top:15px;padding-left:100px;padding-right:100px">
+            <h1 class="title-color">Histórico</h1>
+            <hr>
+            <form [formGroup]="FilterForm" (ngSubmit)="onSubmit()" style="display:flex;padding:0rem;">
+                <div id = 'own-posts' class="form-group" style="padding-right:0px;margin-right:0px;width:auto;">
+                    <label class="switch">
+                        <input id="a" type="checkbox" (click)="toggle()">
+                        <span class="slider round"></span>
+                    </label>  
+                </div>
+                <div id="who" class="form-group" style="width:auto;">
+                    {{who}}
+                </div>
+
+                       
+                <div class="form-group">
+                    <select style="padding-left:0rem!important;" type="form-control" class="form-control" name="DepartamentoReferenciado" id="DepartamentoReferenciado" formControlName="targetDepartamentName">
+                        <option value="" selected>Departamento Referenciado</option>
+                        <option  *ngFor="let dep of departments" value={{dep}}>{{dep}}</option>
+                    </select><br>
+                </div>
+            
+                <div class="form-group">
+                    <select  type="form-control" class="form-control" name="DepartamentoAutor" id="DepartamentoAutor" formControlName="authorDepartamentName">
+                        <option value="" selected>Departamento do Autor</option>
+                        <option  *ngFor="let dep of departments" value={{dep}}>{{dep}}</option>
+                    </select><br>
+                </div>
+
+                <div class="form-group">
+                    <select type="form-control" class="form-control" name="context" id="context" formControlName="context">
+                        <option value="" selected>Contexto</option>
+                        <option value="Sugestão">Sugestão</option>
+                        <option value="Elogio">Elogio</option>
+                        <option value="Reclamação">Reclamação</option>
+                    </select><br>
+                </div>
+            
+                <div class="form-group">
+                    <select type="form-control" class="form-control" name="Situação" id="Situação" formControlName="status">
+                        <option value="" selected>situação</option>
+                        <option value="Resolvido">Resolvido</option>
+                        <option value="Não Resolvido">Não Resolvido</option>
+                        <option value="Pendente">Pendente</option>
+                    </select><br>
+                </div>
+                <p style="padding-top:0.4rem;">de</p>
+                <div class="form-group" style="width:7vw;padding-top:1rem;">
+                    <input type="date" class="form-control" name="StartDate" id="StartDate" formControlName="startDate">
+                    <br>
+                </div>
+                <p style="padding-top:0.4rem;">a</p>
+                <div class="form-group" style="width:7vw;padding-top:1rem;">
+                    <input type="date" class="form-control" name="EndDate" id="EndDate" formControlName="endDate">
+                    <br>
+                </div>
+                
+                <div style="padding:1rem;padding-right:0rem!important;margin-right: 0rem;" id="submit-btn">
+                    <input type="submit" class="btn btn-primary mt-4 blue-btn" value="Filtrar">
+                </div>
+            </form>
+        </div>
+        
+    </div>
+    <div class='background-color' style="min-height:59vh;">
+        <div id="grid" class="grid-container">
+            {{warningText}}
+            <div class="tooltip" *ngFor = "let post of posts">
+                <div class="grid-item">
+                    <h4 style="text-align:left;font-size:16px;">{{post.title}}</h4>
+                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;font-size:16px;">• Departamento do Autor: {{ post.authorDepartamentName != null ?  post.authorDepartamentName : "Não Informado"}}</p>
+                <p class="text-color-dark" style="text-align:left;padding-left:1.5rem;margin:0rem;font-size:16px;">• Departamento Referenciado: {{ post.targetDepartamentName != null ? post.targetDepartamentName : "Não Informado" }}</p>
+                <br>
+                <p class="text-color-light" style="padding-left:2rem;margin:0rem;text-align: left;font-size:14px;">Contexto: {{ post.context }}</p>
+                <p class="text-color-light" style="padding-left:2rem;margin:0rem;text-align: left;font-size:14px;">Situação:{{post.status}}, {{ post. createdAt }}</p>
+                
+                </div>
+                
+                <div class="tooltiptext grid-item">
+                    <h4 style="text-align:left;font-size:16px;padding-left:1rem;">{{post.title}}</h4>
+                    <p style="text-align:left;font-size:16px; padding-left:1rem;">{{post.text}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
